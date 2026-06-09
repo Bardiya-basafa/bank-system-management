@@ -29,3 +29,33 @@ GET /account
 # delete an account with account id
 DELETE /account/{id}
 
+---
+
+Staff
+# get all staff
+GET /staff
+
+# create new staff
+POST /staff
+
+# get staff by staff id
+GET /staff/{id}
+
+# delete a staff with id
+DELETE /staff/{id}
+
+---
+
+Currency
+# get all currencies
+GET /currency
+
+# create new currency
+POST /currency
+
+# get staff by currency id
+GET /currency/{id}
+
+# delete a currency with id
+DELETE /currency/{id}
+
