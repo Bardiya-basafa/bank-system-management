@@ -1,0 +1,31 @@
+Customer
+# get all customer
+GET /customer
+
+# create new customer
+POST /customer
+
+# get customer by customer id
+GET /customer/{id}
+
+# delete a customer with id
+DELETE /customer/{id}
+
+# get all accounts with customer id
+GET /customer/account/{id}
+
+---
+
+Account
+# create a new account
+POST /account
+
+# get account info with account id
+GET /account/{id}
+
+# get all accounts
+GET /account
+
+# delete an account with account id
+DELETE /account/{id}
+
