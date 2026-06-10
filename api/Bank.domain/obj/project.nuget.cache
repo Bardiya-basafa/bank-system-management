@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Hni+M84qguY=",
+  "dgSpecHash": "VStyPmRDuE4=",
   "success": true,
-  "projectFilePath": "/home/bardiya/Projects/Bank Management/api/Bank.domain/Bank.domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Notebook\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.9\\microsoft.extensions.dependencyinjection.abstractions.10.0.9.nupkg.sha512"
+  ],
   "logs": []
 }

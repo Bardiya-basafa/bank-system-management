@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/home/bardiya/Projects/Bank Management/api/Bank.infrastructure/Bank.infrastructure.csproj": {}
+    "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj": {}
   },
   "projects": {
-    "/home/bardiya/Projects/Bank Management/api/Bank.infrastructure/Bank.infrastructure.csproj": {
+    "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bardiya/Projects/Bank Management/api/Bank.infrastructure/Bank.infrastructure.csproj",
-        "projectName": "Bank.infrastructure",
-        "projectPath": "/home/bardiya/Projects/Bank Management/api/Bank.infrastructure/Bank.infrastructure.csproj",
-        "packagesPath": "/home/bardiya/.nuget/packages/",
-        "outputPath": "/home/bardiya/Projects/Bank Management/api/Bank.infrastructure/obj/",
+        "projectUniqueName": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj",
+        "projectName": "Bank.domain",
+        "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj",
+        "packagesPath": "C:\\Users\\Notebook\\.nuget\\packages\\",
+        "outputPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/bardiya/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Notebook\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,11 +38,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,7 +65,84 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.117/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj",
+        "projectName": "Bank.infrastructure",
+        "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Notebook\\.nuget\\packages\\",
+        "outputPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Notebook\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj": {
+                "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
