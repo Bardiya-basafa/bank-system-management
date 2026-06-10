@@ -1,12 +1,24 @@
 ﻿namespace Bank.infrastructure.Repositories;
 
+using Dapper;
+using DbContext;
 using domain.Entities;
 using domain.RepositoryContracts;
 
 
 public class CustomerRepository : ICustomerRepository {
+    private readonly DbContext _context;
 
-    public Task<List<Customer>> GetAllAsync() => throw new NotImplementedException();
+    public CustomerRepository(DbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<List<Customer>> GetAllAsync()
+    {
+        using var db = _context.GetConnection();
+        db.Execute("SELECT * FROM customer.Customer");
+    }
 
     public Task<Customer> GetByIdAsync(int id) => throw new NotImplementedException();
 
