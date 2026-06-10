@@ -1,0 +1,17 @@
+# Build folders
+bin/
+obj/
+**/[Bb]in/
+**/[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code (if using it)
+.vscode/
+
+# App settings with sensitive data
+appsettings.Development.json
+appsettings.*.local.json

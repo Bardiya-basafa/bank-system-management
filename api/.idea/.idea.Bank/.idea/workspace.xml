@@ -8,45 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="adding dapper">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/DbContext/DbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/DbContext/DbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/Repositories/CustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/Repositories/CustomerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/bin/Debug/net9.0/Bank.infrastructure.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/ref/Bank.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/ref/Bank.infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/refint/Bank.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/refint/Bank.infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.infrastructure.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/Bank.presentation.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/bin/Debug/net9.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/apphost.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/ref/Bank.presentation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/ref/Bank.presentation.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/refint/Bank.presentation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/refint/Bank.presentation.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rjsmrazor.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rjsmrazor.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rpswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/rpswa.dswa.cache.json" afterDir="false" />
-    </list>
+    <list default="true" id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -147,6 +109,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Bank.infrastructure/Repositories/CustomerRepository.cs</url>
+          <line>22</line>
+          <properties documentPath="E:\Projects\Bank Management\bank-system-management\api\Bank.infrastructure\Repositories\CustomerRepository.cs" containingFunctionPresentation="Method 'GetAllAsync'">
+            <startOffsets>
+              <option value="528" />
+            </startOffsets>
+            <endOffsets>
+              <option value="552" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
