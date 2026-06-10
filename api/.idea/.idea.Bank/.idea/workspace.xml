@@ -9,19 +9,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Account.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/AccountBalanceHistory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/AccountOwner.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Atm.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/AtmCash.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Branch.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Card.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/CheckBook.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/CheckPaper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Currency.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Device.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/IndividualCustomer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Loan.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Message.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/OrganizationCustomer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Staff.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/Transaction.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bank.domain/Entities/TransactionStatusHistory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.domain/Entities/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/Entities/Customer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +137,7 @@
       <updated>1781066859129</updated>
       <workItem from="1781066861432" duration="558000" />
       <workItem from="1781074828721" duration="280000" />
+      <workItem from="1781106988644" duration="730000" />
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
