@@ -20,7 +20,7 @@ public class CustomerController : ControllerBase {
         _customerService = customerService;
     }
 
-    [HttpGet("/")]
+    [HttpGet]
     public async Task<IActionResult> GetCustomers()
     {
         var customers = await _customerService.GetCustomers();
@@ -36,7 +36,7 @@ public class CustomerController : ControllerBase {
         return Ok(customer);
     }
 
-    [HttpPost("/")]
+    [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] Customer request)
     {
         var customer = await _customerService.CreateCustomer(request);

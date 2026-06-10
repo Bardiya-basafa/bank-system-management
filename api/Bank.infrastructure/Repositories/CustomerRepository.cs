@@ -23,12 +23,58 @@ public class CustomerRepository : ICustomerRepository {
         return results.ToList();
     }
 
-    public Task<Customer> GetByIdAsync(int id) => throw new NotImplementedException();
+    public async Task<Customer> GetByIdAsync(int id)
+    {
+        using var db = _context.GetConnection();
 
-    public Task<Customer> CreateAsync(Customer customer) => throw new NotImplementedException();
+        var sql = @"SELECT * 
+                    FROM customer.customer
+                    WHERE customer_id = @Id";
 
-    public Task<Customer> UpdateAsync(Customer customer) => throw new NotImplementedException();
+        var customer = await db.QueryFirstAsync<Customer>(sql, new { Id = id });
 
-    public Task DeleteAsync(int id) => throw new NotImplementedException();
+        return customer;
+    }
+
+    public async Task<int> CreateAsync(Customer customer)
+    {
+        using var db = _context.GetConnection();
+
+        var sql = @"
+        INSERT INTO customer.customer
+        (customer_type, phone, email, password_hash, status)
+        VALUES
+        (@CustomerType, @Phone, @Email, @PasswordHash, @Status)";
+
+        return await db.ExecuteAsync(sql, customer);
+    }
+
+    public async Task<int> UpdateAsync(Customer customer)
+    {
+        using var db = _context.GetConnection();
+
+        var sql = @"
+        UPDATE customer.customer
+        SET
+            customer_type = @CustomerType,
+            phone = @Phone,
+            email = @Email,
+            password_hash = @PasswordHash,
+            status = @Status,
+            updated_at = SYSDATETIME()
+        WHERE customer_id = @CustomerId";
+
+        return await db.ExecuteAsync(sql, customer);
+    }
+
+    public async Task<int> DeleteAsync(int id)
+    {
+        using var db = _context.GetConnection();
+
+        var sql = @"DELETE FROM customer.customer 
+                    WHERE customer_id = @Id";
+
+        return await db.ExecuteAsync(sql, new { Id = id });
+    }
 
 }

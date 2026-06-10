@@ -9,10 +9,10 @@ public interface ICustomerService {
 
     Task<Customer> GetCustomer(int id);
 
-    Task<Customer> CreateCustomer(Customer customer);
+    Task<int> CreateCustomer(Customer customer);
 
-    Task<Customer> UpdateCustomer(Customer customer);
+    Task<int> UpdateCustomer(Customer customer);
 
-    Task<bool> DeleteCustomer(int id);
+    Task<int> DeleteCustomer(int id);
 
 }

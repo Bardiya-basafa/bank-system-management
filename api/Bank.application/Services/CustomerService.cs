@@ -19,12 +19,24 @@ public class CustomerService : ICustomerService {
         return await _customerRepository.GetAllAsync();
     }
 
-    public Task<Customer> GetCustomer(int id) => throw new NotImplementedException();
+    public async Task<Customer> GetCustomer(int id)
+    {
+        return await _customerRepository.GetByIdAsync(id);
+    }
 
-    public Task<Customer> CreateCustomer(Customer customer) => throw new NotImplementedException();
+    public async Task<int> CreateCustomer(Customer customer)
+    {
+        return await _customerRepository.CreateAsync(customer);
+    }
 
-    public Task<Customer> UpdateCustomer(Customer customer) => throw new NotImplementedException();
+    public async Task<int> UpdateCustomer(Customer customer)
+    {
+        return await _customerRepository.UpdateAsync(customer);
+    }
 
-    public Task<bool> DeleteCustomer(int id) => throw new NotImplementedException();
+    public async Task<int> DeleteCustomer(int id)
+    {
+        return await _customerRepository.DeleteAsync(id);
+    }
 
 }
