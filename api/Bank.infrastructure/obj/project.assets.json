@@ -73,6 +73,20 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "Bank.application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Bank.domain": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.9"
+        },
+        "compile": {
+          "bin/placeholder/Bank.application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bank.application.dll": {}
+        }
+      },
       "Bank.domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -207,6 +221,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Bank.application/1.0.0": {
+      "type": "project",
+      "path": "../Bank.application/Bank.application.csproj",
+      "msbuildProject": "../Bank.application/Bank.application.csproj"
+    },
     "Bank.domain/1.0.0": {
       "type": "project",
       "path": "../Bank.domain/Bank.domain.csproj",
@@ -215,6 +234,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Bank.application >= 1.0.0",
       "Bank.domain >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 10.0.8",
       "Microsoft.Extensions.Configuration.Abstractions >= 10.0.9",
@@ -246,6 +266,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj": {
+              "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj"
+            },
             "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj": {
               "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj"
             }

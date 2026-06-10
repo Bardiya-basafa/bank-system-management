@@ -160,6 +160,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj": {
+                "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj"
+              },
               "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj": {
                 "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.domain\\Bank.domain.csproj"
               }
@@ -239,6 +242,9 @@
             "projectReferences": {
               "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj": {
                 "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.application\\Bank.application.csproj"
+              },
+              "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj": {
+                "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj"
               },
               "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj": {
                 "projectPath": "E:\\Projects\\Bank Management\\bank-system-management\\api\\Bank.infrastructure\\Bank.infrastructure.csproj"
