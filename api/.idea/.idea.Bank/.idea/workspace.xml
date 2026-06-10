@@ -8,7 +8,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="" />
+    <list default="true" id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bank/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/Debug/net9.0/Bank.domain.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.domain/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/Debug/net9.0/Bank.infrastructure.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.infrastructure/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/Debug/net9.0/Bank.presentation.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Bank.presentation/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,19 +34,44 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Bardiya-basafa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Bardiya-basafa/bank-system-management.git&quot;,
+    &quot;accountId&quot;: &quot;de46ea41-1fdd-49b8-b8ba-8c275633918a&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://E:/Projects/Bank Management/bank-system-management/api/Bank.application/obj/Debug/net9.0/Bank.application.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="3EvxXEVH8tkd8bupuIK8x2efEjY" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Bank.presentation: http.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.Bank.presentation: http.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
@@ -57,6 +96,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="commit branch divergan">
       <option name="closed" value="true" />
@@ -82,8 +122,20 @@
       <option name="project" value="LOCAL" />
       <updated>1781065530257</updated>
     </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f61a8c7-99be-4fc7-b161-b233e4c4064a" name="Changes" comment="" />
+      <created>1781066859129</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781066859129</updated>
+      <workItem from="1781066861432" duration="558000" />
+      <workItem from="1781074828721" duration="280000" />
+    </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />

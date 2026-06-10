@@ -14,8 +14,6 @@ GO
 /* =========================================================
    SCHEMAS
 ========================================================= */
-CREATE SCHEMA security;
-GO
 CREATE SCHEMA customer;
 GO
 CREATE SCHEMA branch;
@@ -40,37 +38,7 @@ CREATE SCHEMA loan;
 GO
 CREATE SCHEMA message;
 GO
-CREATE SCHEMA payment;
-GO
 CREATE SCHEMA ledger;
-GO
-
-/* =========================================================
-   SECURITY / AUDIT
-========================================================= */
-CREATE TABLE security.audit_log
-(
-    log_id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    entity_type VARCHAR(50) NOT NULL,
-    entity_id BIGINT NOT NULL,
-    action_type VARCHAR(20) NOT NULL,
-    performed_by_user_id INT NULL,
-    performed_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    details NVARCHAR(MAX) NULL
-);
-GO
-
-CREATE TABLE security.entity_version
-(
-    version_id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    entity_type VARCHAR(50) NOT NULL,
-    entity_id BIGINT NOT NULL,
-    version_no INT NOT NULL,
-    changed_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    changed_by_user_id INT NULL,
-    payload NVARCHAR(MAX) NOT NULL,
-    CONSTRAINT UQ_entity_version UNIQUE (entity_type, entity_id, version_no)
-);
 GO
 
 /* =========================================================
@@ -272,8 +240,6 @@ CREATE TABLE card.card
     account_id INT NOT NULL UNIQUE,
     expire_date DATE NOT NULL,
     cvv2 VARBINARY(256) NOT NULL,
-    -- pin_hash VARBINARY(256) NOT NULL,
-    -- second_pin_hash VARBINARY(256) NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'active'
         CHECK (status IN ('active', 'blocked', 'expired', 'cancelled')),
     issued_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
@@ -326,54 +292,6 @@ CREATE TABLE atm.atm_cash
 );
 GO
 
-/* =========================================================
-   POS / REGISTERED DEVICE
-========================================================= */
-
--- no need for pos (device with type 'pos')
--- CREATE TABLE device.pos
--- (
---     pos_id INT IDENTITY(1,1) PRIMARY KEY,
---     device_id INT NOT NULL UNIQUE,
---     customer_id INT NULL,
---     branch_id INT NULL,
---     register_address VARCHAR(256) NULL,
---     register_date DATE NOT NULL DEFAULT CAST(GETDATE() AS DATE),
---     status VARCHAR(20) NOT NULL DEFAULT 'active'
---         CHECK (status IN ('active', 'inactive', 'blocked')),
---     CONSTRAINT FK_pos_device
---         FOREIGN KEY (device_id)
---         REFERENCES device.device(device_id),
---     CONSTRAINT FK_pos_customer
---         FOREIGN KEY (customer_id)
---         REFERENCES customer.customer(customer_id)
---         ON DELETE SET NULL,
---     CONSTRAINT FK_pos_branch
---         FOREIGN KEY (branch_id)
---         REFERENCES branch.branch(branch_id)
---         ON DELETE SET NULL
--- );
--- GO
-
--- CREATE TABLE device.registered_device
--- (
---     registered_device_id INT IDENTITY(1,1) PRIMARY KEY,
---     customer_id INT NOT NULL,
---     device_id INT NOT NULL,
---     registered_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
---     status VARCHAR(20) NOT NULL DEFAULT 'active'
---         CHECK (status IN ('active', 'revoked')),
---     CONSTRAINT FK_registered_device_customer
---         FOREIGN KEY (customer_id)
---         REFERENCES customer.customer(customer_id)
---         ON DELETE NO ACTION,
---     CONSTRAINT FK_registered_device_device
---         FOREIGN KEY (device_id)
---         REFERENCES device.device(device_id)
---         ON DELETE NO ACTION,
---     CONSTRAINT UQ_registered_device UNIQUE (customer_id, device_id)
--- );
--- GO
 
 /* =========================================================
    TRANSACTIONS
@@ -468,8 +386,6 @@ CREATE TABLE cheque.check_paper
     check_number VARCHAR(30) NOT NULL UNIQUE,
     checkbook_id INT NOT NULL,
     receiver_account_id INT NOT NULL,
-    -- drawer_account_id INT NOT NULL,
-    -- payer_account_id INT NOT NULL,
     amount DECIMAL(18,2) NOT NULL
         CHECK (amount > 0),
     issued_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
@@ -502,7 +418,6 @@ CREATE TABLE loan.loan
     loan_id INT IDENTITY(1,1) PRIMARY KEY,
     account_id INT NOT NULL,
     guarantor_customer_id INT NOT NULL,
-    -- loan_type VARCHAR(30) NOT NULL,
     amount DECIMAL(18,2) NOT NULL
         CHECK (amount > 0),
     interest_rate DECIMAL(5,2) NOT NULL
@@ -523,29 +438,6 @@ CREATE TABLE loan.loan
 );
 GO
 
-
--- no need for facility
--- CREATE TABLE loan.facility
--- (
---     facility_id INT IDENTITY(1,1) PRIMARY KEY,
---     account_id INT NOT NULL,
---     facility_type VARCHAR(30) NOT NULL,
---     credit_limit DECIMAL(18,2) NOT NULL
---         CHECK (credit_limit > 0),
---     interest_rate DECIMAL(5,2) NOT NULL
---         CHECK (interest_rate >= 0 AND interest_rate <= 100),
---     period_months INT NOT NULL
---         CHECK (period_months > 0),
---     status VARCHAR(20) NOT NULL DEFAULT 'active'
---         CHECK (status IN ('active', 'suspended', 'closed')),
---     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
---     CONSTRAINT FK_facility_account
---         FOREIGN KEY (account_id)
---         REFERENCES account.account(account_id)
---         ON DELETE NO ACTION
--- );
--- GO
-
 /* =========================================================
    MESSAGE
 ========================================================= */
@@ -565,47 +457,6 @@ CREATE TABLE message.message
         ON DELETE NO ACTION
 );
 GO
-
-/* =========================================================
-   ONLINE PAYMENT
-========================================================= */
--- CREATE TABLE payment.online_payment
--- (
---     online_payment_id INT IDENTITY(1,1) PRIMARY KEY,
---     customer_id INT NOT NULL,
---     amount DECIMAL(18,2) NOT NULL
---         CHECK (amount > 0),
---     reference_code VARCHAR(50) NOT NULL UNIQUE,
---     provider_name VARCHAR(100) NULL,
---     payment_status VARCHAR(20) NOT NULL DEFAULT 'pending'
---         CHECK (payment_status IN ('pending', 'successful', 'failed', 'reversed')),
---     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
---     completed_at DATETIME2 NULL,
---     CONSTRAINT FK_online_payment_customer
---         FOREIGN KEY (customer_id)
---         REFERENCES customer.customer(customer_id)
---         ON DELETE NO ACTION
--- );
--- GO
-
-
-/* =========================================================
-   LEDGER
-========================================================= */
--- CREATE TABLE ledger.ledger_account
--- (
---     ledger_account_id INT IDENTITY(1,1) PRIMARY KEY,
---     account_code VARCHAR(20) NOT NULL UNIQUE,
---     account_name VARCHAR(100) NOT NULL,
---     parent_ledger_account_id INT NULL,
---     status VARCHAR(20) NOT NULL DEFAULT 'active'
---         CHECK (status IN ('active', 'inactive')),
---     CONSTRAINT FK_ledger_account_parent
---         FOREIGN KEY (parent_ledger_account_id)
---         REFERENCES ledger.ledger_account(ledger_account_id)
---         ON DELETE NO ACTION
--- );
--- GO
 
 /* =========================================================
    HISTORICAL LEDGER / BALANCE TRACKING
@@ -640,96 +491,6 @@ CREATE TABLE ledger.transaction_status_history
         REFERENCES trx.transactions(transaction_id)
         ON DELETE NO ACTION
 );
-GO
-
-/* =========================================================
-   INDEXES
-========================================================= */
-CREATE INDEX IX_customer_status ON customer.customer(status);
-GO
-
-CREATE INDEX IX_individual_customer_ssn ON customer.individual_customer(ssn);
-GO
-
-CREATE INDEX IX_organization_customer_contact_person ON customer.organization_customer(contact_person_id);
-GO
-
-CREATE INDEX IX_staff_branch ON staff.staff(branch_id);
-GO
-
-CREATE INDEX IX_account_currency ON account.account(currency_id);
-GO
-
-CREATE INDEX IX_account_status ON account.account(account_status);
-GO
-
-CREATE INDEX IX_account_owner_customer ON account.account_owner(customer_id);
-GO
-
-CREATE INDEX IX_card_account ON card.card(account_id);
-GO
-
-CREATE INDEX IX_atm_branch ON atm.atm(branch_id);
-GO
-
-CREATE INDEX IX_atm_cash_currency ON atm.atm_cash(currency_id);
-GO
-
-CREATE INDEX IX_pos_branch ON device.pos(branch_id);
-GO
-
-CREATE INDEX IX_pos_customer ON device.pos(customer_id);
-GO
-
-CREATE INDEX IX_registered_device_customer ON device.registered_device(customer_id);
-GO
-
-CREATE INDEX IX_registered_device_device ON device.registered_device(device_id);
-GO
-
-CREATE INDEX IX_transactions_source ON trx.transactions(source_account_id);
-GO
-
-CREATE INDEX IX_transactions_target ON trx.transactions(target_account_id);
-GO
-
-CREATE INDEX IX_transactions_device ON trx.transactions(device_id);
-GO
-
-CREATE INDEX IX_transactions_status ON trx.transactions(transaction_status);
-GO
-
-CREATE INDEX IX_checkbook_account ON cheque.checkbook(account_id);
-GO
-
-CREATE INDEX IX_checkbook_branch ON cheque.checkbook(branch_id);
-GO
-
-CREATE INDEX IX_check_paper_checkbook ON cheque.check_paper(checkbook_id);
-GO
-
-CREATE INDEX IX_check_paper_drawer_account ON cheque.check_paper(drawer_account_id);
-GO
-
-CREATE INDEX IX_check_paper_payer_account ON cheque.check_paper(payer_account_id);
-GO
-
-CREATE INDEX IX_loan_account ON loan.loan(account_id);
-GO
-
-CREATE INDEX IX_loan_guarantor_customer ON loan.loan(guarantor_customer_id);
-GO
-
-CREATE INDEX IX_facility_account ON loan.facility(account_id);
-GO
-
-CREATE INDEX IX_message_customer ON message.message(customer_id);
-GO
-
-CREATE INDEX IX_online_payment_customer ON payment.online_payment(customer_id);
-GO
-
-CREATE INDEX IX_ledger_parent ON ledger.ledger_account(parent_ledger_account_id);
 GO
 
 /* =========================================================
