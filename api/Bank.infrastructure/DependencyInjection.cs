@@ -12,6 +12,10 @@ public static class DependencyInjection {
     {
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
+        services.AddSingleton(
+        new DbContext.DbContext(
+        configuration.GetConnectionString("DefaultConnection")));
+
         return services;
     }
 

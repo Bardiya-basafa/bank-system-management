@@ -7,6 +7,7 @@ using domain.RepositoryContracts;
 
 
 public class CustomerRepository : ICustomerRepository {
+
     private readonly DbContext _context;
 
     public CustomerRepository(DbContext context)
@@ -17,7 +18,9 @@ public class CustomerRepository : ICustomerRepository {
     public async Task<List<Customer>> GetAllAsync()
     {
         using var db = _context.GetConnection();
-        db.Execute("SELECT * FROM customer.Customer");
+        var results = await db.QueryAsync<Customer>("SELECT * FROM customer.customer");
+
+        return results.ToList();
     }
 
     public Task<Customer> GetByIdAsync(int id) => throw new NotImplementedException();
