@@ -1,10 +1,3 @@
-IF DB_ID('BankSystemV1') IS NOT NULL
-BEGIN
-    ALTER DATABASE BankSystemV1 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE BankSystemRevised;
-END;
-GO
-
 CREATE DATABASE BankSystemV1;
 GO
 
@@ -226,7 +219,7 @@ CREATE TABLE device.device
     status VARCHAR(20) NOT NULL DEFAULT 'active'
         CHECK (status IN ('active', 'deactivated', 'maintenance')),
     CONSTRAINT FK_device_customer
-    FOREIGN KEY(customer_id) REFERENCES customer(customer_id) ON DELETE NO ACTION
+    FOREIGN KEY(customer_id) REFERENCES customer.customer(customer_id) ON DELETE NO ACTION
 );
 GO
 
@@ -259,7 +252,6 @@ CREATE TABLE atm.atm
 (
     atm_id INT IDENTITY(1,1) PRIMARY KEY,
     branch_id INT NULL,
-    device_id INT NOT NULL UNIQUE,
     city VARCHAR(50) NOT NULL,
     address VARCHAR(256) NOT NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'active'
@@ -269,9 +261,6 @@ CREATE TABLE atm.atm
         FOREIGN KEY (branch_id)
         REFERENCES branch.branch(branch_id)
         ON DELETE SET NULL,
-    CONSTRAINT FK_atm_device
-        FOREIGN KEY (device_id)
-        REFERENCES device.device(device_id)
 );
 GO
 
@@ -333,8 +322,7 @@ CREATE TABLE trx.transactions
         (
             (transaction_type = 'transfer'
         AND source_account_id IS NOT NULL
-        AND target_account_id IS NOT NULL
-        AND device_id IS NULL)
+        AND target_account_id IS NOT NULL)
         OR
         (transaction_type = 'withdraw'
         AND source_account_id IS NOT NULL
@@ -346,7 +334,6 @@ CREATE TABLE trx.transactions
         OR
         (transaction_type = 'purchase'
         AND source_account_id IS NOT NULL
-        AND device_id IS NOT NULL
         AND target_account_id IS NULL)
         OR
         (transaction_type = 'bill_payment'
@@ -397,12 +384,8 @@ CREATE TABLE cheque.check_paper
         FOREIGN KEY (checkbook_id)
         REFERENCES cheque.checkbook(checkbook_id)
         ON DELETE NO ACTION,
-    CONSTRAINT FK_check_paper_drawer_account
-        FOREIGN KEY (drawer_account_id)
-        REFERENCES account.account(account_id)
-        ON DELETE NO ACTION,
-    CONSTRAINT FK_check_paper_payer_account
-        FOREIGN KEY (payer_account_id)
+    CONSTRAINT FK_check_paper_receiver_account
+        FOREIGN KEY (receiver_account_id)
         REFERENCES account.account(account_id)
         ON DELETE NO ACTION,
     CONSTRAINT CK_check_paper_expire_date
