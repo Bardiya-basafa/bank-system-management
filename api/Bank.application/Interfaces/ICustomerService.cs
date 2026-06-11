@@ -14,5 +14,7 @@ public interface ICustomerService {
     Task<int> UpdateCustomer(Customer customer);
 
     Task<int> DeleteCustomer(int id);
+    
+    Task<List<Account>> GetAccounts(int id);
 
 }

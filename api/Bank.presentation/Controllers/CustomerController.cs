@@ -61,4 +61,13 @@ public class CustomerController : ControllerBase {
         return Ok(customer);
     }
 
+    // get customer accounts
+    [HttpGet("/account/{id:int}")]
+    public async Task<IActionResult> GetAccountById(int id)
+    {
+        var accounts = await _customerService.GetAccounts(id);
+
+        return Ok(accounts);
+    }
+
 }

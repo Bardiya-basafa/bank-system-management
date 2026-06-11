@@ -39,4 +39,9 @@ public class CustomerService : ICustomerService {
         return await _customerRepository.DeleteAsync(id);
     }
 
+    public async Task<List<Account>> GetAccounts(int id)
+    {
+        return await _customerRepository.GetAllAccountsAsync(id);
+    }
+
 }

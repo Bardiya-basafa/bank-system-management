@@ -14,5 +14,6 @@ public interface ICustomerRepository {
     Task<int> UpdateAsync(Customer customer);
 
     Task<int> DeleteAsync(int id);
-
+    
+    Task<List<Account>> GetAllAccountsAsync(int id);
 }

@@ -77,4 +77,14 @@ public class CustomerRepository : ICustomerRepository {
         return await db.ExecuteAsync(sql, new { Id = id });
     }
 
+    public async Task<List<Account>> GetAllAccountsAsync(int id)
+    {
+        using var db = _context.GetConnection();
+
+        var sql = @"SELECT * from account.account where customer_id = @Id";
+        var result = await db.QueryAsync<Account>(sql, new { Id = id });
+
+        return result.ToList();
+    }
+
 }
