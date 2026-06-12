@@ -39,12 +39,6 @@ public class AccountRepository : IAccountRepository {
     {
         using var db = _context.GetConnection();
 
-        // var sql = @"
-        // INSERT INTO account.account
-        // (account_number, currency_id, account_type, balance, account_status)
-        // VALUES
-        // (@AccountNumber, @CurrencyId, @AccountType, @Balance, @AccountStatus)";
-
         var parameters = new
         {
             CustId = customerId,
@@ -85,9 +79,13 @@ public class AccountRepository : IAccountRepository {
     {
         using var db = _context.GetConnection();
 
-        return await db.ExecuteAsync(
-        "DELETE FROM account.account WHERE account_id = @Id",
+        var result = await db.ExecuteAsync(
+        "DELETE FROM account.account_owner WHERE account_id = @Id",
         new { Id = id });
+
+        result += await db.ExecuteAsync("DELETE FROM account.account where account_id = @Id", new { Id = id });
+
+        return result;
     }
 
 }
