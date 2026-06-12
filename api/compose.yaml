@@ -10,7 +10,9 @@
 
   database:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: sqlserver
+    #    or if there is other version like 22
+    #    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: database
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
@@ -20,7 +22,6 @@
       - "1433:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
-      - ./backup:/var/opt/mssql/backup
     restart: unless-stopped
 
 volumes:
