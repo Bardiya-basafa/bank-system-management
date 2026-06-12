@@ -35,7 +35,9 @@ public class StaffRepository : IStaffRepository {
             FROM staff.staff
             WHERE staff_id = @Id";
 
-        return await db.QueryFirstOrDefaultAsync<Staff>(sql, new { Id = id });
+        var result = await db.QueryFirstOrDefaultAsync<Staff>(sql, new { Id = id });
+
+        return result;
     }
 
     public async Task<int> CreateAsync(Staff staff)
@@ -48,27 +50,35 @@ public class StaffRepository : IStaffRepository {
                 branch_id,
                 first_name,
                 last_name,
-                national_code,
+                ssn,
                 phone,
                 email,
-                job_title,
                 hire_date,
-                status
+                status,
+                password_hash,
+                role,
+                address
             )
             VALUES
             (
                 @BranchId,
                 @FirstName,
                 @LastName,
-                @NationalCode,
+                @Ssn,
                 @Phone,
                 @Email,
-                @JobTitle,
                 @HireDate,
-                @Status
-            )";
+                @Status,
+                @PasswordHash,
+                @Role,
+                @Address
+            )
+            SELECT CAST(SCOPE_IDENTITY() AS INT);
+            ";
 
-        return await db.ExecuteAsync(sql, staff);
+        var newId = await db.ExecuteScalarAsync<int>(sql, staff);
+
+        return newId;
     }
 
     public async Task<int> UpdateAsync(Staff staff)
@@ -81,15 +91,19 @@ public class StaffRepository : IStaffRepository {
                 branch_id = @BranchId,
                 first_name = @FirstName,
                 last_name = @LastName,
-                national_code = @NationalCode,
                 phone = @Phone,
                 email = @Email,
-                job_title = @JobTitle,
+                role = @Role,
+                termination_date = @TerminationDate,
                 hire_date = @HireDate,
-                status = @Status
+                status = @Status,
+                address = @Address,
+                updated_at = SYSDATETIME()
             WHERE staff_id = @StaffId";
 
-        return await db.ExecuteAsync(sql, staff);
+        var affectedRows = await db.ExecuteAsync(sql, staff);
+
+        return affectedRows;
     }
 
     public async Task<int> DeleteAsync(int id)
@@ -100,7 +114,9 @@ public class StaffRepository : IStaffRepository {
             DELETE FROM staff.staff
             WHERE staff_id = @Id";
 
-        return await db.ExecuteAsync(sql, new { Id = id });
+        var affectedRows = await db.ExecuteAsync(sql, new { Id = id });
+
+        return affectedRows;
     }
 
 }

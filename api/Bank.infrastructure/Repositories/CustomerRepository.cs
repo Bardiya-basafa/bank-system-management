@@ -48,7 +48,7 @@ public class CustomerRepository : ICustomerRepository {
         
         SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-        return await db.ExecuteAsync(sql, customer);
+        return await db.ExecuteScalarAsync<int>(sql, customer);
     }
 
     public async Task<int> UpdateAsync(Customer customer)
