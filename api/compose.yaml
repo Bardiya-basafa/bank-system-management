@@ -1,0 +1,28 @@
+﻿services:
+  api:
+    image: bank.presentation
+    build:
+      context: .
+      dockerfile: Bank.presentation/Dockerfile
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Developer
+      - MSSQL_AGENT_ENABLED=true
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./backup:/var/opt/mssql/backup
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
+    driver: local
