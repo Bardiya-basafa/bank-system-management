@@ -1,12 +1,12 @@
 ﻿services:
-  api:
-    image: bank.presentation
-    build:
-      context: .
-      dockerfile: Bank.presentation/Dockerfile
-    ports:
-      - "5000:8080"
-      - "5001:8081"
+  # api:
+  #   image: bank.presentation
+  #   build:
+  #     context: .
+  #     dockerfile: Bank.presentation/Dockerfile
+  #   ports:
+  #     - "5000:8080"
+  #     - "5001:8081"
 
   database:
     image: mcr.microsoft.com/mssql/server:2025-latest
@@ -19,7 +19,7 @@
       - MSSQL_PID=Developer
       - MSSQL_AGENT_ENABLED=true
     ports:
-      - "1433:1433"
+      - "1434:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
     restart: unless-stopped
