@@ -81,8 +81,8 @@ public class CustomerRepository : ICustomerRepository {
     {
         using var db = _context.GetConnection();
 
-        var sql = @"SELECT * from account.account where customer_id = @Id";
-        var result = await db.QueryAsync<Account>(sql, new { Id = id });
+        var sql = @"SELECT * from account.account where account_id in (select account_id from account.account_owner where customer_id = @CustomerId)";
+        var result = await db.QueryAsync<Account>(sql, new { CustomerId = id });
 
         return result.ToList();
     }

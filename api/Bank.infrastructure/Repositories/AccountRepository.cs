@@ -1,5 +1,6 @@
 ﻿namespace Bank.infrastructure.Repositories;
 
+using System.Data;
 using Dapper;
 using DbContext;
 using domain.Entities;
@@ -34,17 +35,33 @@ public class AccountRepository : IAccountRepository {
         new { Id = id });
     }
 
-    public async Task<int> CreateAsync(Account account)
+    public async Task<int> CreateAsync(Account account, int customerId)
     {
         using var db = _context.GetConnection();
 
-        var sql = @"
-        INSERT INTO account.account
-        (account_number, currency_id, account_type, balance, account_status)
-        VALUES
-        (@AccountNumber, @CurrencyId, @AccountType, @Balance, @AccountStatus)";
+        // var sql = @"
+        // INSERT INTO account.account
+        // (account_number, currency_id, account_type, balance, account_status)
+        // VALUES
+        // (@AccountNumber, @CurrencyId, @AccountType, @Balance, @AccountStatus)";
 
-        return await db.ExecuteAsync(sql, account);
+        var parameters = new
+        {
+            CustId = customerId,
+            AccNumber = account.AccountNumber,
+            CurrencyId = account.CurrencyId,
+            AccType = account.AccountType,
+            Balance = account.Balance,
+            AccStatus = account.AccountStatus
+        };
+
+        var result = await db.ExecuteAsync(
+        "usp_CreatAcc",
+        parameters,
+        commandType: CommandType.StoredProcedure
+        );
+
+        return result;
     }
 
     public async Task<int> UpdateAsync(Account account)

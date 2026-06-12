@@ -9,7 +9,7 @@ public interface IAccountService {
 
     Task<Account?> GetByIdAsync(int id);
 
-    Task<int> CreateAsync(Account account);
+    Task<int> CreateAsync(Account account,int customerId);
 
     Task<int> UpdateAsync(Account account);
 

@@ -7,7 +7,7 @@ using application.Interfaces;
 using domain.Entities;
 
 
-[Route("api/account")]
+[Route("api/account/")]
 public class AccountController : ControllerBase {
 
     private readonly ILogger<CustomerController> _logger;
@@ -39,10 +39,10 @@ public class AccountController : ControllerBase {
     }
 
     // create new account
-    [HttpPost]
-    public async Task<IActionResult> CreateAccount([FromBody] Account request)
+    [HttpPost("{id:int}")]
+    public async Task<IActionResult> CreateAccount([FromBody] Account request, int id)
     {
-        var customer = await _accountService.CreateAsync(request);
+        var customer = await _accountService.CreateAsync(request, id);
 
         // create customer
         return Ok(customer);
@@ -59,7 +59,7 @@ public class AccountController : ControllerBase {
 
     // update an account
     [HttpPut]
-    public async Task<IActionResult> UpdateCustomer([FromBody] Account request)
+    public async Task<IActionResult> UpdateAccount([FromBody] Account request)
     {
         var result = await _accountService.UpdateAsync(request);
 

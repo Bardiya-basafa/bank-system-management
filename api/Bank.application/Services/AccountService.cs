@@ -24,9 +24,9 @@ public class AccountService : IAccountService {
         return await _accountRepository.GetByIdAsync(id);
     }
 
-    public async Task<int> CreateAsync(Account account)
+    public async Task<int> CreateAsync(Account account,int customerId)
     {
-        return await _accountRepository.CreateAsync(account);
+        return await _accountRepository.CreateAsync(account, customerId);
     }
 
     public async Task<int> UpdateAsync(Account account)
