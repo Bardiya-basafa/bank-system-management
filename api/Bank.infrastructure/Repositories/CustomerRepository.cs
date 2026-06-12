@@ -44,7 +44,9 @@ public class CustomerRepository : ICustomerRepository {
         INSERT INTO customer.customer
         (customer_type, phone, email, password_hash, status)
         VALUES
-        (@CustomerType, @Phone, @Email, @PasswordHash, @Status)";
+        (@CustomerType, @Phone, @Email, @PasswordHash, @Status)
+        
+        SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         return await db.ExecuteAsync(sql, customer);
     }

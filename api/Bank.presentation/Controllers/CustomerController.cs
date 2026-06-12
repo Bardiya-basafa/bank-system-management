@@ -7,7 +7,7 @@ using application.Interfaces;
 using domain.Entities;
 
 
-[Route("api/customer")]
+[Route("api/customer/")]
 public class CustomerController : ControllerBase {
 
     private readonly ILogger<CustomerController> _logger;

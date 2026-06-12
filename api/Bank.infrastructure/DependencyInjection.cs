@@ -12,6 +12,8 @@ public static class DependencyInjection {
     {
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IStaffRepository, StaffRepository>();
+        services.AddScoped<IBranchRepository, BranchRepository>();
 
         services.AddSingleton(
         new DbContext.DbContext(
