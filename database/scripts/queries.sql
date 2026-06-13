@@ -27,13 +27,6 @@ from customer_account c
     JOIN card.card cr on cr.account_id = c.account_id
 WHERE c.customer_id = 1 AND cr.[status] = 'active'
 
--- all customer registered devices
-SELECT
-    c.*,
-    r.*
-FROM customer.customer c
-    JOIN device.registered_device r on  c.customer_id = r.customer_id
-
 -- select all information on specific customer
 SELECT
     *
@@ -100,7 +93,7 @@ WHERE t.source_account_id = 1 OR t.target_account_id =1
 SELECT
     *
 FROM trx.transactions t
-WHERE t.device_id = 1
+WHERE t.target_account_id = 1
 
 -- all pending transactions
 SELECT
@@ -160,12 +153,14 @@ SELECT
     l.loan_id ,
     amount*((interest_rate/100) + 1) / loan_term_months as repayment_amount
 FROM loan.loan l
-WHERE l.loan_id = 'active'
+WHERE l.repayment_status = 'active'
 
 -- all the cheque from each account
 SELECT
-    *
+    a.*,
+    cp.*
 FROM account.account a
-    JOIN cheque.check_paper c on c.drawer_account_id = a.account_id
+    JOIN cheque.checkbook c on c.account_id = a.account_id
+    JOIN cheque.check_paper cp on cp.checkbook_id = c.checkbook_id
     
 
