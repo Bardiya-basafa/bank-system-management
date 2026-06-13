@@ -1,6 +1,3 @@
-/* =========================================================
-   OPTIONAL: TRIGGERS FOR AUDIT / HISTORY
-   ========================================================= */
 CREATE TRIGGER account.trg_account_balance_history
 ON account.account
 AFTER UPDATE
