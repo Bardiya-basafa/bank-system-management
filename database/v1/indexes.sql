@@ -5,7 +5,7 @@ GO
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
 WHERE name = 'IX_customer_status' AND object_id = OBJECT_ID('customer.customer'))
-    CREATE INDEX IX_customer_status ON customer.customer(status);
+    CREATE INDEX IX_customer_status ON customer.customer([status]);
 GO
 
 -- customer.individual_customer
@@ -70,32 +70,6 @@ WHERE name = 'IX_atm_cash_currency' AND object_id = OBJECT_ID('atm.atm_cash'))
     CREATE INDEX IX_atm_cash_currency ON atm.atm_cash(currency_id);
 GO
 
--- device.pos
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_pos_branch' AND object_id = OBJECT_ID('device.pos'))
-    CREATE INDEX IX_pos_branch ON device.pos(branch_id);
-GO
-
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_pos_customer' AND object_id = OBJECT_ID('device.pos'))
-    CREATE INDEX IX_pos_customer ON device.pos(customer_id);
-GO
-
--- device.registered_device
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_registered_device_customer' AND object_id = OBJECT_ID('device.registered_device'))
-    CREATE INDEX IX_registered_device_customer ON device.registered_device(customer_id);
-GO
-
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_registered_device_device' AND object_id = OBJECT_ID('device.registered_device'))
-    CREATE INDEX IX_registered_device_device ON device.registered_device(device_id);
-GO
-
 -- trx.transactions
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
@@ -112,7 +86,7 @@ GO
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
 WHERE name = 'IX_transactions_device' AND object_id = OBJECT_ID('trx.transactions'))
-    CREATE INDEX IX_transactions_device ON trx.transactions(device_id);
+    CREATE INDEX IX_transactions_device ON trx.transactions(source_device_id);
 GO
 
 IF NOT EXISTS (SELECT 1
@@ -143,14 +117,8 @@ GO
 
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
-WHERE name = 'IX_check_paper_drawer_account' AND object_id = OBJECT_ID('cheque.check_paper'))
-    CREATE INDEX IX_check_paper_drawer_account ON cheque.check_paper(drawer_account_id);
-GO
-
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
 WHERE name = 'IX_check_paper_payer_account' AND object_id = OBJECT_ID('cheque.check_paper'))
-    CREATE INDEX IX_check_paper_payer_account ON cheque.check_paper(payer_account_id);
+    CREATE INDEX IX_check_paper_payer_account ON cheque.check_paper(receiver_account_id);
 GO
 
 -- loan.loan
@@ -166,13 +134,6 @@ WHERE name = 'IX_loan_guarantor_customer' AND object_id = OBJECT_ID('loan.loan')
     CREATE INDEX IX_loan_guarantor_customer ON loan.loan(guarantor_customer_id);
 GO
 
--- loan.facility
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_facility_account' AND object_id = OBJECT_ID('loan.facility'))
-    CREATE INDEX IX_facility_account ON loan.facility(account_id);
-GO
-
 -- message.message
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
@@ -180,16 +141,9 @@ WHERE name = 'IX_message_customer' AND object_id = OBJECT_ID('message.message'))
     CREATE INDEX IX_message_customer ON message.message(customer_id);
 GO
 
--- payment.online_payment
-IF NOT EXISTS (SELECT 1
-FROM sys.indexes
-WHERE name = 'IX_online_payment_customer' AND object_id = OBJECT_ID('payment.online_payment'))
-    CREATE INDEX IX_online_payment_customer ON payment.online_payment(customer_id);
-GO
-
 -- ledger.ledger_account
 IF NOT EXISTS (SELECT 1
 FROM sys.indexes
-WHERE name = 'IX_ledger_parent' AND object_id = OBJECT_ID('ledger.ledger_account'))
-    CREATE INDEX IX_ledger_parent ON ledger.ledger_account(parent_ledger_account_id);
+WHERE name = 'IX_ledger_parent' AND object_id = OBJECT_ID('ledger.account_balance_history'))
+    CREATE INDEX IX_ledger_parent ON ledger.account_balance_history(account_id);
 GO
