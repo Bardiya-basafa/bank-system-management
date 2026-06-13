@@ -6,8 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 
 
-public static class DependencyInjection
-{
+public static class DependencyInjection {
 
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
@@ -15,15 +14,16 @@ public static class DependencyInjection
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IStaffRepository, StaffRepository>();
         services.AddScoped<IBranchRepository, BranchRepository>();
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 
         // for local database
-        // services.AddSingleton(
-        // new DbContext.DbContext(
-        // configuration.GetConnectionString("DefaultConnection")));
+        services.AddSingleton(
+        new DbContext.DbContext(
+        configuration.GetConnectionString("DefaultConnection")));
 
         // for docker database
-        services.AddSingleton(new DbContext.DbContext(
-        configuration.GetConnectionString("DockerDatabase")));
+        // services.AddSingleton(new DbContext.DbContext(
+        // configuration.GetConnectionString("DockerDatabase")));
 
         return services;
     }
