@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Bank.presentation.DTO;
 
 
 namespace Bank.presentation.Controllers;
@@ -8,7 +9,8 @@ using domain.Entities;
 
 
 [Route("api/customer/")]
-public class CustomerController : ControllerBase {
+public class CustomerController : ControllerBase
+{
 
     private readonly ILogger<CustomerController> _logger;
 
@@ -37,12 +39,20 @@ public class CustomerController : ControllerBase {
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCustomer([FromBody] Customer request)
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
     {
-        var customer = await _customerService.CreateCustomer(request);
+        var customer = new Customer
+        {
+            CustomerType = request.CustomerType,
+            Phone = request.Phone,
+            Email = request.Email,
+            PasswordHash = System.Text.Encoding.UTF8.GetBytes(request.Password),
+            Status = request.Status
+        };
+        var result = await _customerService.CreateCustomer(customer);
 
         // create customer
-        return Ok(customer);
+        return Ok(result);
     }
 
     [HttpDelete("{id:int}")]
