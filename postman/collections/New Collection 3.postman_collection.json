@@ -1,0 +1,123 @@
+{
+  "info": {
+    "_postman_id": "99a18adb-f8e7-43ef-949e-1de7bb009e7a",
+    "name": "staff",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get staff by id",
+      "id": "9baefc69-1f30-41b5-97e8-c4467ca8cdda",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{staffurl}}/7",
+          "host": [
+            "{{staffurl}}"
+          ],
+          "path": [
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update staff",
+      "id": "1ec6c0ce-2b1b-4f2e-a088-2695536285c1",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"staffId\": 7,\r\n    \"firstName\": \"narcis\",\r\n    \"lastName\": \"safari\",\r\n    \"ssn\": \"MTMyNDI=\",\r\n    \"email\": \"barya@bank.com\",\r\n    \"phone\": \"91112\",\r\n    \"passwordHash\": \"MTMyNDIz\",\r\n    \"role\": \"manager\",\r\n    \"address\": \"123 Main St\",\r\n    \"hireDate\": \"2026-06-10T00:00:00\",\r\n    \"terminationDate\": null,\r\n    \"branchId\": 2,\r\n    \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{staffurl}}",
+          "host": [
+            "{{staffurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete staff",
+      "id": "ff70cc95-6b91-4053-9ac5-893ce9d83672",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{staffurl}}/6",
+          "host": [
+            "{{staffurl}}"
+          ],
+          "path": [
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get staff",
+      "id": "ffd29793-52d6-4ac3-9436-a9e6794af455",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{staffurl}}",
+          "host": [
+            "{{staffurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create staff",
+      "id": "3556fa32-ed96-447e-8313-6516a3ebcae8",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"ali\",\r\n    \"lastName\": \"basafa\",\r\n    \"ssn\": \"13242\",\r\n    \"email\": \"barya@bank.com\",\r\n    \"phone\": \"91112\",\r\n    \"password\": \"132423\",\r\n    \"role\": \"manager\",\r\n    \"address\": \"123 Main St\",\r\n    \"hireDate\": \"2026-06-10T00:00:00\",\r\n    \"terminationDate\": null,\r\n    \"branchId\": 2,\r\n    \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{staffurl}}",
+          "host": [
+            "{{staffurl}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "info": {
+    "_postman_id": "c5551e3a-442d-4b9a-81a9-63f53d973504",
+    "name": "account",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get accounts",
+      "id": "d7740a39-af44-4893-b887-4ca45fba3689",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{accounturl}}",
+          "host": [
+            "{{accounturl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get account by id",
+      "id": "58da3698-3bb2-4461-aac3-c0c444793fc5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{accounturl}}/2",
+          "host": [
+            "{{accounturl}}"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create account",
+      "id": "d4c1f8fd-364f-4981-8aed-2263c43f9b7b",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"accountNumber\": \"1000000000000006\",\r\n    \"currencyId\": 3,\r\n    \"accountType\": \"current\",\r\n    \"balance\": 15000.00,\r\n    \"accountStatus\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{accounturl}}/6",
+          "host": [
+            "{{accounturl}}"
+          ],
+          "path": [
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update account",
+      "id": "0355b5d9-3d92-4ae6-b885-6e4310d5e96e",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"accountId\": 2,\r\n    \"accountNumber\": \"1000000000000002\",\r\n    \"currencyId\": 3,\r\n    \"accountType\": \"current\",\r\n    \"balance\": 35000.00\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{accounturl}}",
+          "host": [
+            "{{accounturl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete account",
+      "id": "4d24c395-8043-4b98-bf89-8199c982e120",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{accounturl}}/6",
+          "host": [
+            "{{accounturl}}"
+          ],
+          "path": [
+            "6"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
