@@ -13,6 +13,8 @@ update oporations should be performed by dapper
 it is more easy to write sp for each one
 
 */
+USE BankSystemV1;
+GO
 
 -- login user with email and password
 CREATE procedure usp_LoginWithEmailPass
@@ -500,9 +502,7 @@ CREATE PROCEDURE usp_CreateCard
     @CardNum CHAR(16),
     @AccId INT,
     @ExpDate DATE,
-    @Cvv2 VARCHAR(4),
-    @PinHash VARCHAR(4),
-    @SecPinHash VARCHAR(4)
+    @Cvv2 VARCHAR(4)
 AS
 BEGIN
     BEGIN TRY
@@ -511,11 +511,11 @@ BEGIN
 
     INSERT into card.card
         (
-        card_number,account_id,expire_date,cvv2,pin_hash,second_pin_hash
+        card_number,account_id,expire_date,cvv2
         )
 
     VALUES(
-            @CardNum, @AccId, @ExpDate, HASHBYTES('SHA_256',@Cvv2), HASHBYTES('SHA_256',@PinHash), HASHBYTES('SHA_256',@SecPinHash)
+            @CardNum, @AccId, @ExpDate, HASHBYTES('SHA_256',@Cvv2)
     )
     COMMIT TRANSACTION;
 
@@ -534,7 +534,6 @@ GO
 -- create new atm
 CREATE PROCEDURE usp_CreateAtm
     @BrnchId int = NULL,
-    @DvcId INT,
     @City VARCHAR(50),
     @Addr VARCHAR(256),
     @EstabDate DATE
@@ -546,11 +545,11 @@ BEGIN
 
     INSERT into atm.atm
         (
-        branch_id,device_id,city,address,establish_date
+        branch_id,city,address,establish_date
         )
     VALUES
         (
-            @BrnchId, @DvcId, @City, @Addr, @EstabDate
+            @BrnchId, @City, @Addr, @EstabDate
     )
 
     COMMIT TRANSACTION;
@@ -678,7 +677,7 @@ BEGIN
 
     INSERT into cheque.check_paper
         (
-        check_number,checkbook_id,recevier_account_id,amount,expire_date,[status]
+        check_number,checkbook_id,receiver_account_id,amount,expire_date,[status]
         )
     VALUES
         (
