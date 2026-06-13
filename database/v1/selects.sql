@@ -41,37 +41,16 @@ SELECT *
 FROM device.device;
 GO
 SELECT *
-FROM device.pos;
-GO
-SELECT *
-FROM device.registered_device;
-GO
-SELECT *
 FROM ledger.account_balance_history;
 GO
 SELECT *
-FROM ledger.ledger_account;
-GO
-SELECT *
 FROM ledger.transaction_status_history;
-GO
-SELECT *
-FROM loan.facility;
 GO
 SELECT *
 FROM loan.loan;
 GO
 SELECT *
 FROM [message].[message];
-GO
-SELECT *
-FROM payment.online_payment;
-GO
-SELECT *
-FROM [security].audit_log;
-GO
-SELECT *
-FROM [security].entity_version;
 GO
 SELECT *
 FROM staff.staff;
