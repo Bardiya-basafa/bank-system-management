@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getCustomerById, getCustomerAccounts } from "../../api/customerApi";
-import { clientcreateAccount, deleteAccount } from "../../api/accountApi";
+import { clientcreateAccount, deleteAccount } from "../../api/accountApi"; 
 import DataTable from '../../components/common/DataTable';
 
 interface Customer {
@@ -27,6 +27,7 @@ export default function CustomerDashboardPage() {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [accountNumber, setAccountNumber] = useState<string>("");
   const [currencyId, setCurrencyId] = useState<string>("1");
   const [accountType, setAccountType] = useState<string>("saving");
   const [balance, setBalance] = useState<string>("0");
@@ -54,15 +55,12 @@ export default function CustomerDashboardPage() {
   }, [id]);
 
   const handleDeleteAccount = async (accountId: number) => {
-    const confirmDelete = window.confirm(`Are you sure you want to delete Account #${accountId}?`);
-    if (!confirmDelete) return;
+    if (!window.confirm(`Are you sure you want to delete Account #${accountId}?`)) return;
 
     try {
       await deleteAccount(accountId);
-      alert("Account deleted.");
       await loadDashboardData();
     } catch (error) {
-      console.error("Failed to delete account:", error);
       alert("Failed to delete account.");
     }
   };
@@ -73,8 +71,8 @@ export default function CustomerDashboardPage() {
     setIsSubmitting(true);
 
     try {
-      await clientcreateAccount({
-        customerId: Number(id),
+      await clientcreateAccount(Number(id), {
+        accountNumber: accountNumber,
         currencyId: Number(currencyId),
         accountType: accountType,
         balance: Number(balance),
@@ -82,10 +80,9 @@ export default function CustomerDashboardPage() {
       });
       
       alert("Account successfully created!");
-      
+      setAccountNumber("");
       setBalance("0");
       await loadDashboardData(); 
-
     } catch (error) {
       console.error("Failed to create account:", error);
       alert("Failed to create account.");
@@ -100,97 +97,45 @@ export default function CustomerDashboardPage() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", padding: "1rem" }}>
       <Link to="/employee/customers">← Back to Customers</Link>
-
-      <h1 style={{ marginBottom: "0.5rem" }}>Customer Dashboard</h1>
-      <hr style={{ marginBottom: "2rem" }} />
-
-      {/* --- 1. PROFILE SECTION --- */}
+      <h1>Customer Dashboard</h1>
+      
       <h2>Profile Information</h2>
-      <div style={{ marginBottom: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
-        <p><strong>ID:</strong> {customer.customerId}</p>
-        <p><strong>Type:</strong> {customer.customerType}</p>
-        <p><strong>Email:</strong> {customer.email}</p>
-        <p><strong>Phone:</strong> {customer.phone}</p>
+      <div style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '4px', background: '#f9f9f9' }}>
+        <p><strong>ID:</strong> {customer.customerId} | <strong>Email:</strong> {customer.email}</p>
       </div>
 
-      {/* --- 2. ACCOUNTS LIST SECTION --- */}
-      <h2>Accounts & Balances</h2>
-      {accounts.length === 0 ? (
-        <p style={{ marginBottom: '2rem' }}>No accounts found for this customer.</p>
-      ) : (
-        <div style={{ marginBottom: '2rem' }}>
-          <DataTable>
-            <thead>
-              <tr>
-                <th>Account ID</th>
-                <th>Account Number</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Balance</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {accounts.map((acc) => (
-                <tr key={acc.accountId}>
-                  <td>{acc.accountId}</td>
-                  <td>{acc.accountNumber}</td>
-                  <td>{acc.accountType}</td>
-                  <td>{acc.accountStatus}</td>
-                  <td>${acc.balance.toFixed(2)}</td>
-                  <td>
-                    <button 
-                      onClick={() => handleDeleteAccount(acc.accountId)}
-                      style={{ padding: "4px 8px", backgroundColor: "#d9534f", color: "white", border: "none", borderRadius: "3px", cursor: "pointer" }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </DataTable>
-        </div>
-      )}
+      <h2>Accounts</h2>
+      <DataTable>
+        <thead>
+          <tr><th>Number</th><th>Type</th><th>Status</th><th>Balance</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          {accounts.map((acc) => (
+            <tr key={acc.accountId}>
+              <td>{acc.accountNumber}</td>
+              <td>{acc.accountType}</td>
+              <td>{acc.accountStatus}</td>
+              <td>${acc.balance.toFixed(2)}</td>
+              <td>
+                <button onClick={() => handleDeleteAccount(acc.accountId)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </DataTable>
 
-      {/* --- 3. CREATE ACCOUNT SECTION --- */}
       <h2>Open New Account</h2>
-      <form onSubmit={handleCreateAccount} style={{ padding: '1rem', border: '1px solid #ddd', borderRadius: '4px', display: 'flex', gap: '10px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
-        
-        <div style={{ flex: 1, minWidth: '100px' }}>
-          <label>Currency ID</label><br/>
-          <input type="number" required value={currencyId} onChange={(e) => setCurrencyId(e.target.value)} style={{ width: "100%" }} />
-        </div>
-
-        <div style={{ flex: 1, minWidth: '120px' }}>
-          <label>Type</label><br/>
-          <select value={accountType} onChange={(e) => setAccountType(e.target.value)} style={{ width: "100%", padding: "2px" }}>
-            <option value="saving">Saving</option>
-            <option value="checking">Checking</option>
-          </select>
-        </div>
-
-        <div style={{ flex: 1, minWidth: '100px' }}>
-          <label>Initial Deposit</label><br/>
-          <input type="number" step="0.01" required value={balance} onChange={(e) => setBalance(e.target.value)} style={{ width: "100%" }} />
-        </div>
-
-        <div style={{ flex: 1, minWidth: '120px' }}>
-          <label>Status</label><br/>
-          <select value={accountStatus} onChange={(e) => setAccountStatus(e.target.value)} style={{ width: "100%", padding: "2px" }}>
-            <option value="active">Active</option>
-            <option value="pending">Pending</option>
-          </select>
-        </div>
-
-        <div style={{ flex: 1, minWidth: '120px' }}>
-          <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "4px" }}>
-            {isSubmitting ? "Saving..." : "Create"}
-          </button>
-        </div>
-
+      <form onSubmit={handleCreateAccount} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <input type="text" placeholder="Account Number" required value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+        <input type="number" placeholder="Currency ID" required value={currencyId} onChange={(e) => setCurrencyId(e.target.value)} />
+        <select value={accountType} onChange={(e) => setAccountType(e.target.value)}>
+          <option value="saving">Saving</option>
+          <option value="current">Current</option>
+          <option value="business">Business</option>
+        </select>
+        <input type="number" step="0.01" placeholder="Balance" required value={balance} onChange={(e) => setBalance(e.target.value)} />
+        <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Create"}</button>
       </form>
-
     </div>
   );
 }

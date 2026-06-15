@@ -1,15 +1,16 @@
-namespace Bank.presentation.Controllers;
+﻿namespace Bank.presentation.Controllers;
 
 using application.Interfaces;
 using domain.RepositoryContracts;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
+
 [Route("api/auth")]
-[ApiController]
 public class AuthController : ControllerBase {
 
     private readonly IAuthRepository _authRepository;
+
     private readonly IJwtService _jwtService;
 
     public AuthController(IAuthRepository authRepository, IJwtService jwtService)
@@ -31,4 +32,5 @@ public class AuthController : ControllerBase {
 
         return Ok(new { token });
     }
+
 }

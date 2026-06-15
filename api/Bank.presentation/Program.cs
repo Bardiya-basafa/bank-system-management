@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 

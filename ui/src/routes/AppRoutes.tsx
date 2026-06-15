@@ -1,7 +1,10 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import ProtectedRoute from '../components/ProtectedRoute';
+import LoginPage from '../pages/LoginPage';
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
 import EmployeeDashboardPage from "../pages/employee/EmployeeDashboardPage";
 import CustomerListPage from "../pages/employee/CustomerListPage";
 import CustomerDetailsPage from "../pages/employee/CustomerDetailsPage";
@@ -23,55 +26,73 @@ import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
-import AdminDashboardPage  from '../pages/admin/AdminDashboardPage';
 
 
+const SmartRoot = () => {
+  const token = localStorage.getItem('jwt');
+  if (!token) return <Navigate to="/login" replace />;
+
+  try {
+    const decodedToken: any = jwtDecode(token);
+    const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || decodedToken.role;
+    const rolesArray = (Array.isArray(userRole) ? userRole : [userRole]).map(r => String(r).toLowerCase());
+
+    if (rolesArray.includes('admin')) return <Navigate to="/admin" replace />;
+    if (rolesArray.includes('manager')) return <Navigate to="/manager" replace />;
+    if (rolesArray.includes('employee')) return <Navigate to="/employee" replace />;
+    if (rolesArray.includes('customer')) return <Navigate to="/client/dashboard" replace />; 
+    
+    return <Navigate to="/login" replace />;
+  } catch {
+    localStorage.removeItem('jwt');
+    return <Navigate to="/login" replace />;
+  }
+};
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<SmartRoot />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/unauthorized" element={<h1>403 - Unauthorized</h1>} />
 
-        {/* Home */}
-        <Route path="/" element={<h1>Bank System</h1>} />
+        {/* --- ADMIN  --- */}
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="/admin" element={<AdminDashboardPage />} />
+        </Route>
+
+        {/* --- MANAGER ROUTES --- */}
+        <Route element={<ProtectedRoute allowedRoles={['manager', 'admin']} />}> 
+          <Route path="/manager" element={<ManagerDashboardPage />} />
+          <Route
+            path="/manager/staff"
+            element={<StaffListPage />}
+          />
+
+          <Route
+            path="/manager/staff/create"
+            element={<CreateStaffPage />}
+          />
+
+          <Route
+            path="/manager/staff/:id"
+            element={<StaffDetailsPage />}
+          />
+
+          <Route
+            path="/manager/reports"
+            element={<ReportsPage />}
+          />
+        </Route>
+
+        {/* --- EMPLOYEE --- */}
+        <Route element={<ProtectedRoute allowedRoles={['employee', 'manager', 'admin']} />}>
+        <Route path="/employee" element={<EmployeeDashboardPage />} />
 
         <Route
-          path="/client/:id"
-          element={<CustomerDashboardPage />}
-        />
-
-        <Route
-          path="/client/:id/create"
-          element={<ClientCreateAccountPage />}
-        />
-
-        <Route
-          path="/client/:id/edit"
-          element={<EditAccountPage />}
-        />
-
-        <Route
-          path="/client/:id/delete/:aid"
-          element={<DeleteAccountPage />}
-        />
-
-        {/* Customer */}
-        <Route
-          path="/customer/create"
-          element={<CreateCustomerPage />}
-        />
-
-        <Route path="/admin"             element={<AdminDashboardPage />} />
-        <Route path="/admin/branches"    element={<BranchAdminPage />} />
-        <Route path="/admin/currencies"  element={<CurrencyAdminPage />} />
-        <Route path="/admin/settings"    element={<AdminSettingsPage />} />
-
-
-
-        {/* Employee */}
-        <Route
-          path="/employee"
-          element={<EmployeeDashboardPage />}
+            path="/employee"
+            element={<EmployeeDashboardPage />}
         />
 
         <Route
@@ -93,43 +114,33 @@ export default function AppRoutes() {
           path="/employee/account/create"
           element={<CreateAccountPage />}
         />
+        </Route>
+        {/* --- CUSTOMER --- */}
+        <Route element={<ProtectedRoute allowedRoles={['customer']} />}>
+          <Route element={<ProtectedRoute allowedRoles={['employee', 'manager', 'admin', 'customer']} />}>
+          <Route path="/client/:id" element={<CustomerDashboardPage />} />
 
-        {/* Manager */}
-        <Route
-          path="/manager"
-          element={<ManagerDashboardPage />}
-        />
+          <Route
+            path="/client/:id/create"
+            element={<ClientCreateAccountPage />}
+          />
 
-        <Route
-          path="/manager/staff"
-          element={<StaffListPage />}
-        />
+          <Route
+            path="/client/:id/edit"
+            element={<EditAccountPage />}
+          />
 
-        <Route
-          path="/manager/staff/create"
-          element={<CreateStaffPage />}
-        />
+          <Route
+            path="/customer/:id/delete/:aid"
+            element={<DeleteAccountPage />}
+          />
 
-        <Route
-          path="/manager/staff/:id"
-          element={<StaffDetailsPage />}
-        />
-
-        <Route
-          path="/manager/reports"
-          element={<ReportsPage />}
-        />
-
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-
-        <Route
-          path="/admin"
-          element={<AdminDashboardPage />}
-        />
-
+          <Route
+            path="/customer/create"
+            element={<CreateCustomerPage />}
+          />
+          </Route>
+        </Route>
 
       </Routes>
     </BrowserRouter>
