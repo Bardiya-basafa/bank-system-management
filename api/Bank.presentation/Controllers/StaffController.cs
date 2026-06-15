@@ -35,41 +35,56 @@ public class StaffController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> CreateStaff([FromBody] CreateStaffRequest request)
     {
-        var staff = new Staff
-        {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Ssn = System.Text.Encoding.UTF8.GetBytes(request.Ssn),
-            Email = request.Email,
-            Phone = request.Phone,
-            PasswordHash = System.Text.Encoding.UTF8.GetBytes(request.Password),
-            Role = request.Role,
-            Address = request.Address,
-            HireDate = request.HireDate,
-            TerminationDate = request.TerminationDate,
-            BranchId = request.BranchId,
-            Status = request.Status
-        };
+        try{
+            var staff = new Staff
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Ssn = System.Text.Encoding.UTF8.GetBytes(request.Ssn),
+                Email = request.Email,
+                Phone = request.Phone,
+                PasswordHash = System.Text.Encoding.UTF8.GetBytes(request.Password),
+                Role = request.Role,
+                Address = request.Address,
+                HireDate = request.HireDate,
+                TerminationDate = request.TerminationDate,
+                BranchId = request.BranchId,
+                Status = request.Status
+            };
 
-        var newId = await _staffService.CreateAsync(staff);
+            var newId = await _staffService.CreateAsync(staff);
 
-        return Ok(new { newId = newId });
+            return Ok(new { newId = newId });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpPut]
     public async Task<IActionResult> UpdateStaff([FromBody] Staff staff)
     {
-        var result = await _staffService.UpdateAsync(staff);
+        try{
+            var result = await _staffService.UpdateAsync(staff);
 
-        return Ok(new { rowAffected = result });
+            return Ok(new { rowAffected = result });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteStaff(int id)
     {
-        var result = await _staffService.DeleteAsync(id);
+        try{
+            var result = await _staffService.DeleteAsync(id);
 
-        return Ok(new { rowAffected = result });
+            return Ok(new { rowAffected = result });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
 }

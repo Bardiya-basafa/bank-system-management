@@ -15,6 +15,7 @@ public static class DependencyInjection {
         services.AddScoped<IStaffRepository, StaffRepository>();
         services.AddScoped<IBranchRepository, BranchRepository>();
         services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
 
         // for local database
         services.AddSingleton(

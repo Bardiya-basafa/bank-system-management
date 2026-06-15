@@ -42,28 +42,43 @@ public class AccountController : ControllerBase {
     [HttpPost("{id:int}")]
     public async Task<IActionResult> CreateAccount([FromBody] Account request, int id)
     {
-        var customer = await _accountService.CreateAsync(request, id);
+        try{
+            var customer = await _accountService.CreateAsync(request, id);
 
-        // create customer
-        return Ok(customer);
+            // create customer
+            return Ok(customer);
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     // delete an account
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAccount(int id)
     {
-        var result = await _accountService.DeleteAsync(id);
+        try{
+            var result = await _accountService.DeleteAsync(id);
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     // update an account
     [HttpPut]
     public async Task<IActionResult> UpdateAccount([FromBody] Account request)
     {
-        var result = await _accountService.UpdateAsync(request);
+        try{
+            var result = await _accountService.UpdateAsync(request);
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
 }

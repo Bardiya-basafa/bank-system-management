@@ -26,17 +26,27 @@ public class BranchController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> CreateBranch([FromBody] Branch branch)
     {
-        var newId = await _branchService.CreateBranchAsync(branch);
+        try{
+            var newId = await _branchService.CreateBranchAsync(branch);
 
-        return Ok(new { Id = newId });
+            return Ok(new { Id = newId });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteBranch(int id)
     {
-        var affectedRows = await _branchService.DeleteBranchAsync(id);
+        try{
+            var affectedRows = await _branchService.DeleteBranchAsync(id);
 
-        return Ok(new { affectedRows = affectedRows });
+            return Ok(new { affectedRows = affectedRows });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
 }
