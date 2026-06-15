@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "b6e0f446-e05d-4e56-a84e-bad7ac443403",
+    "name": "loan",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get loans",
+      "id": "cafbaf69-b6ec-4ba6-9415-d6b9d7801735",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{loanurl}}",
+          "host": [
+            "{{loanurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get loan by id",
+      "id": "dab993ff-8f9c-4169-bead-2db9698489f2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{loanurl}}/1",
+          "host": [
+            "{{loanurl}}"
+          ],
+          "path": [
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create loan",
+      "id": "59b144a6-3a2f-4c9a-ad74-c5b891008891",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"accountId\": 3,\r\n    \"guarantorCustomerId\": 1,\r\n    \"amount\": 10000.00,\r\n    \"interestRate\": 10.00,\r\n    \"loanTermMonths\": 36,\r\n    \"repaymentStatus\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{loanurl}}",
+          "host": [
+            "{{loanurl}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
