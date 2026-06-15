@@ -75,10 +75,26 @@
       "name": "New Request",
       "id": "78815de3-ea61-48e2-ba51-dcdbae1c756b",
       "request": {
-        "method": "GET",
+        "method": "PATCH",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"staffId\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": ""
+          "raw": "{{branchurl}}/set-manager/3",
+          "host": [
+            "{{branchurl}}"
+          ],
+          "path": [
+            "set-manager",
+            "3"
+          ]
         }
       },
       "response": []
