@@ -23,6 +23,9 @@ import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
+import AdminDashboardPage  from '../pages/admin/AdminDashboardPage';
+
+
 
 export default function AppRoutes() {
   return (
@@ -58,21 +61,10 @@ export default function AppRoutes() {
           element={<CreateCustomerPage />}
         />
 
-        {/* Admin */}
-        <Route
-          path="/admin/currency"
-          element={<CurrencyAdminPage />}
-        />
-
-        <Route
-          path="/admin/settings"
-          element={<AdminSettingsPage />}
-        />
-
-        <Route
-          path="/admin/branch"
-          element={<BranchAdminPage />}
-        />  
+        <Route path="/admin"             element={<AdminDashboardPage />} />
+        <Route path="/admin/branches"    element={<BranchAdminPage />} />
+        <Route path="/admin/currencies"  element={<CurrencyAdminPage />} />
+        <Route path="/admin/settings"    element={<AdminSettingsPage />} />
 
 
 
@@ -131,6 +123,11 @@ export default function AppRoutes() {
         <Route
           path="*"
           element={<NotFoundPage />}
+        />
+
+        <Route
+          path="/admin"
+          element={<AdminDashboardPage />}
         />
 
 
