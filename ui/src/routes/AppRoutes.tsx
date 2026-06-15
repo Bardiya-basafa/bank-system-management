@@ -15,9 +15,12 @@ import StaffDetailsPage from "../pages/manager/StaffDetailsPage";
 import ReportsPage from "../pages/manager/ReportsPage";
 import NotFoundPage from '../pages/NotFoundPage';
 
-import ClientCreateAccountPage from '../pages/employee/CreateAccountPage';
+import ClientCreateAccountPage from '../pages/customers/CreateAccountPage';
 import DeleteAccountPage from '../pages/customers/DeleteAccountPage';
 import CustomerDashboardPage from '../pages/customers/CustomerDashboardPage';
+import CurrencyAdminPage from '../pages/admin/CurrencyAdminPage';
+import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
+import BranchAdminPage from '../pages/admin/BranchAdminPage';
 
 export default function AppRoutes() {
   return (
@@ -41,6 +44,22 @@ export default function AppRoutes() {
           path="/client/:id/delete/:aid"
           element={<DeleteAccountPage />}
         />
+
+        {/* Admin */}
+        <Route
+          path="/admin/currency"
+          element={<CurrencyAdminPage />}
+        />
+
+        <Route
+          path="/admin/settings"
+          element={<AdminSettingsPage />}
+        />
+
+        <Route
+          path="/admin/branch"
+          element={<BranchAdminPage />}
+        />  
 
 
 
