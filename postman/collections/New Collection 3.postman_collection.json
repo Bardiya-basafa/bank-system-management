@@ -12,6 +12,16 @@
         "disableBodyPruning": true
       },
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBhZG1pbi5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImFkbWluQGFkbWluLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbkBhZG1pbi5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTc4MTYyNjE3NiwiaXNzIjoiTXlBcGkiLCJhdWQiOiJNeUFwaVVzZXJzIn0.7pH6waW3-afKczOYg-nCV1HdaDyPGNgJ71uSWeTKDSo",
+              "type": "string"
+            }
+          ]
+        },
         "method": "GET",
         "header": [],
         "url": {
@@ -33,12 +43,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{staffurl}}/7",
+          "raw": "{{staffurl}}/9",
           "host": [
             "{{staffurl}}"
           ],
           "path": [
-            "7"
+            "9"
           ]
         }
       },
@@ -103,7 +113,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"firstName\": \"ali\",\r\n    \"lastName\": \"basafa\",\r\n    \"ssn\": \"13242\",\r\n    \"email\": \"barya@bank.com\",\r\n    \"phone\": \"91112\",\r\n    \"password\": \"132423\",\r\n    \"role\": \"manager\",\r\n    \"address\": \"123 Main St\",\r\n    \"hireDate\": \"2026-06-10T00:00:00\",\r\n    \"terminationDate\": null,\r\n    \"branchId\": 2,\r\n    \"status\": \"active\"\r\n}",
+          "raw": "{\r\n            \"staffId\": 1,\r\n            \"firstName\": \"bard\",\r\n            \"lastName\": \"admin\",\r\n            \"ssn\": \"123456789\",\r\n            \"email\": \"admin@admin.com\",\r\n            \"phone\": \"912\",\r\n            \"password\": \"1234\",\r\n            \"role\": \"admin\",\r\n            \"address\": \"addd\",\r\n            \"hireDate\": \"2026-06-10T00:00:00\",\r\n            \"terminationDate\": null,\r\n            \"branchId\": 3,\r\n            \"createdAt\": \"2026-06-10T11:54:36.9276299\",\r\n            \"updatedAt\": \"2026-06-10T11:54:36.9276299\",\r\n            \"status\": \"active\"\r\n        }",
           "options": {
             "raw": {
               "language": "json"

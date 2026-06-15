@@ -50,9 +50,23 @@
       "enabled": true,
       "type": "default",
       "description": ""
+    },
+    {
+      "key": "authurl",
+      "value": "",
+      "enabled": true,
+      "type": "default",
+      "description": ""
+    },
+    {
+      "key": "reporturl",
+      "value": "",
+      "enabled": true,
+      "type": "default",
+      "description": ""
     }
   ],
   "_postman_variable_scope": "globals",
-  "_postman_exported_at": "2026-06-15T06:13:23.422Z",
+  "_postman_exported_at": "2026-06-15T16:28:43.749Z",
   "_postman_exported_using": "Postman/11.0.0"
 }

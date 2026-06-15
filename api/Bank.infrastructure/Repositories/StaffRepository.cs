@@ -64,12 +64,12 @@ public class StaffRepository : IStaffRepository {
                 @BranchId,
                 @FirstName,
                 @LastName,
-                @Ssn,
+                HASHBYTES('SHA2_256',@Ssn),
                 @Phone,
-                @Email,
+                @Email, 
                 @HireDate,
                 @Status,
-                @PasswordHash,
+                HASHBYTES('SHA2_256',@PasswordHash),
                 @Role,
                 @Address
             )
@@ -95,6 +95,7 @@ public class StaffRepository : IStaffRepository {
                 email = @Email,
                 role = @Role,
                 termination_date = @TerminationDate,
+                password_hash = HASHBYTES('SHA2_256',@PasswordHash),
                 hire_date = @HireDate,
                 status = @Status,
                 address = @Address,

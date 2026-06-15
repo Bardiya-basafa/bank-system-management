@@ -2,10 +2,12 @@
 
 using application.Interfaces;
 using domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
+[ApiController]
 [Route("api/currency/")]
+[Authorize(Roles = "admin,manager")]
 public class CurrencyController : ControllerBase {
 
     private readonly ICurrencyService _currencyService;
