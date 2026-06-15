@@ -22,6 +22,7 @@ import CurrencyAdminPage from '../pages/admin/CurrencyAdminPage';
 import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
+import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
 
 export default function AppRoutes() {
   return (
@@ -49,6 +50,12 @@ export default function AppRoutes() {
         <Route
           path="/client/:id/delete/:aid"
           element={<DeleteAccountPage />}
+        />
+
+        {/* Customer */}
+        <Route
+          path="/customer/create"
+          element={<CreateCustomerPage />}
         />
 
         {/* Admin */}
