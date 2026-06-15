@@ -70,6 +70,18 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "New Request",
+      "id": "78815de3-ea61-48e2-ba51-dcdbae1c756b",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
     }
   ]
 }

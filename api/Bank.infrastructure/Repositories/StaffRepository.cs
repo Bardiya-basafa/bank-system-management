@@ -119,4 +119,19 @@ public class StaffRepository : IStaffRepository {
         return affectedRows;
     }
 
+    public async Task<int> SetBranchId(int staffId, int branchId)
+    {
+        using var db = _context.GetConnection();
+        var staff = await GetByIdAsync(staffId);
+
+        if (staff?.Role != "manager"){
+            return 0;
+        }
+
+        var sql = @"update staff.staff set branch_id = @BranchId where staff_id = @StaffId";
+        var affectedRows = await db.ExecuteAsync(sql, new { BranchId = branchId, StaffId = staffId });
+
+        return affectedRows;
+    }
+
 }

@@ -6,6 +6,24 @@
   },
   "item": [
     {
+      "name": "get staff",
+      "id": "ffd29793-52d6-4ac3-9436-a9e6794af455",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{staffurl}}",
+          "host": [
+            "{{staffurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "get staff by id",
       "id": "9baefc69-1f30-41b5-97e8-c4467ca8cdda",
       "protocolProfileBehavior": {
@@ -69,24 +87,6 @@
           ],
           "path": [
             "6"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "get staff",
-      "id": "ffd29793-52d6-4ac3-9436-a9e6794af455",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{staffurl}}",
-          "host": [
-            "{{staffurl}}"
           ]
         }
       },
