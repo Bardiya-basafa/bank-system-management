@@ -1,0 +1,75 @@
+{
+  "info": {
+    "_postman_id": "5ccbb579-85b0-4fc2-9b7a-246580409654",
+    "name": "branch",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get branches",
+      "id": "fb638e0c-e2e5-41ef-ba40-b57a96f411dc",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{branchurl}}",
+          "host": [
+            "{{branchurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete branch",
+      "id": "d18d1bfa-eef8-4fad-a889-faab7d7455a9",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{branchurl}}/6",
+          "host": [
+            "{{branchurl}}"
+          ],
+          "path": [
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create branch",
+      "id": "ca06598e-834b-4b3d-ad67-fa75f7490fb2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"branchCode\": \"BR16\",\r\n    \"branchName\": \"Central\",\r\n    \"city\": \"Tabriz\",\r\n    \"address\": \"Ferdowsi\",\r\n    \"establishDate\": \"2010-01-01T00:00:00\",\r\n    \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{branchurl}}",
+          "host": [
+            "{{branchurl}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
