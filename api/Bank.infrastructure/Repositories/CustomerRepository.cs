@@ -44,7 +44,8 @@ public class CustomerRepository : ICustomerRepository {
         INSERT INTO customer.customer
         (customer_type, phone, email, password_hash, status)
         VALUES
-        (@CustomerType, @Phone, @Email, @PasswordHash, @Status)
+        (@CustomerType, @Phone, @Email,HASHBYTES('SHA2_256',@PasswordHash), @Status)
+
         
         SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
@@ -61,7 +62,7 @@ public class CustomerRepository : ICustomerRepository {
             customer_type = @CustomerType,
             phone = @Phone,
             email = @Email,
-            password_hash = @PasswordHash,
+            password_hash = HASHBYTES('SHA2_256',@PasswordHash),
             status = @Status,
             updated_at = SYSDATETIME()
         WHERE customer_id = @CustomerId";

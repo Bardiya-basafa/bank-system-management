@@ -3,10 +3,12 @@
 using application.Interfaces;
 using domain.Entities;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
+[ApiController]
 [Route("api/staff/")]
+[Authorize(Roles = "admin,manager,employee,teller,auditor")]
 public class StaffController : ControllerBase {
 
     private readonly IStaffService _staffService;
@@ -35,7 +37,7 @@ public class StaffController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> CreateStaff([FromBody] CreateStaffRequest request)
     {
-        try{
+        // try{
             var staff = new Staff
             {
                 FirstName = request.FirstName,
@@ -55,10 +57,10 @@ public class StaffController : ControllerBase {
             var newId = await _staffService.CreateAsync(staff);
 
             return Ok(new { newId = newId });
-        }
-        catch (Exception e){
-            return BadRequest("Something went wrong");
-        }
+        // }
+        // catch (Exception e){
+        //     return BadRequest("Something went wrong");
+        // }
     }
 
     [HttpPut]

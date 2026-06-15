@@ -5,9 +5,12 @@ namespace Bank.presentation.Controllers;
 
 using application.Interfaces;
 using domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 
+[ApiController]
 [Route("api/account/")]
+[Authorize(Roles = "admin,manager,employee,customer")]
 public class AccountController : ControllerBase {
 
     private readonly ILogger<CustomerController> _logger;

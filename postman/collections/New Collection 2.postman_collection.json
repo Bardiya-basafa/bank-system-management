@@ -15,12 +15,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{customerurl}}/4",
+          "raw": "{{customerurl}}/7",
           "host": [
             "{{customerurl}}"
           ],
           "path": [
-            "4"
+            "7"
           ]
         }
       },
@@ -37,7 +37,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"customerType\": \"individual\",\r\n    \"phone\": \"09120000011\",\r\n    \"email\": \"a1@testt.com\",\r\n    \"passwordHash\": \"ARE=\",\r\n    \"status\": \"active\"\r\n}",
+          "raw": "{\r\n        \"customerType\": \"individual\",\r\n        \"phone\": \"09120000301\",\r\n        \"email\": \"gd1@test.com\",\r\n        \"password\": \"1234\",\r\n        \"status\": \"active\",\r\n        \"createdAt\": \"2026-06-10T11:54:36.8995873\",\r\n        \"updatedAt\": \"2026-06-10T11:54:36.8995873\"\r\n    }",
           "options": {
             "raw": {
               "language": "json"

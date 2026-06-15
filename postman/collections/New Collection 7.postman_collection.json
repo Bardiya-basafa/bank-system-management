@@ -1,0 +1,36 @@
+{
+  "info": {
+    "_postman_id": "dc5bf80a-4d72-4215-866c-c659a1a8bee7",
+    "name": "auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "login",
+      "id": "7dc93cae-7b2f-4f55-8806-efa51f2885dc",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"gd1@test.com\",\r\n    \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{authurl}}/login",
+          "host": [
+            "{{authurl}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -3,10 +3,12 @@
 using application.Interfaces;
 using domain.Entities;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
+[ApiController]
 [Route("api/branch/")]
+[Authorize(Roles = "admin,manager,employee,teller")]
 public class BranchController : ControllerBase {
 
     private readonly IBranchService _branchService;

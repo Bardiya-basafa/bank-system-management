@@ -2,10 +2,13 @@
 
 using application.Interfaces;
 using domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
+[ApiController]
 [Route("api/loan")]
+[Authorize(Roles = "admin,customer,manager,employee")]
 public class LoanController : ControllerBase {
 
     private readonly ILoanService _loanService;

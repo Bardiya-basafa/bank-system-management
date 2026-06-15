@@ -16,6 +16,7 @@ public static class DependencyInjection {
         services.AddScoped<ICurrencyService, CurrencyService>();
         services.AddScoped<ITransactionService, TransactionService>();
         services.AddScoped<ILoanService, LoanService>();
+        services.AddScoped<IJwtService, JwtService>();
 
         return services;
     }
