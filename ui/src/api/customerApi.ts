@@ -15,15 +15,6 @@ export interface CreateCustomerPayload {
   status: string;
 }
 
-export interface UpdateCustomerPayload {
-  customerId: number;
-  customerType: string;
-  phone: string;
-  email: string;
-  passwordHash: string;
-  status: string;
-}
-
 export const getCustomers = () =>
   api.get("/api/customer");
 
@@ -37,6 +28,3 @@ export const createCustomer = (data: CreateCustomerPayload) => {
   return api.post("/api/customer", data);
 };
 
-export const updateCustomer = (data: UpdateCustomerPayload) => {
-  return api.put("/api/customer", data);
-};

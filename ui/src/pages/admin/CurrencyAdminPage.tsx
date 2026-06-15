@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getCurrencies, createCurrency, updateCurrency, deleteCurrency, Currency } from "../../api/currencyApi";
+import { getCurrencies, createCurrency, updateCurrency, deleteCurrency } from "../../api/currencyApi";
 import DataTable from '../../components/common/DataTable';
 
 export default function CurrencyAdminPage() {
-  const [currencies, setCurrencies] = useState<Currency[]>([]);
+  const [currencies, setCurrencies] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   // Form State
@@ -40,7 +40,7 @@ export default function CurrencyAdminPage() {
   };
 
   // Populate form when Edit is clicked
-  const handleEditClick = (currency: Currency) => {
+  const handleEditClick = (currency: any) => {
     setEditingId(currency.currencyId);
     setCurrencyCode(currency.currencyCode);
     setCurrencyName(currency.currencyName);

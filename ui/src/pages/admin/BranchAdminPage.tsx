@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getBranches, createBranch, deleteBranch, Branch } from "../../api/branchApi";
+import { getBranches, createBranch, deleteBranch } from "../../api/branchApi";
 import DataTable from '../../components/common/DataTable';
 
 export default function BranchAdminPage() {
-  const [branches, setBranches] = useState<Branch[]>([]);
+  const [branches, setBranches] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   // Form State

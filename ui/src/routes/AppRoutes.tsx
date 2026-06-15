@@ -23,8 +23,6 @@ import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
-import EditCustomerPage from '../pages/customers/EditCustomerPage';
-import EditStaffPage from '../pages/manager/EditStaffPage';
 
 export default function AppRoutes() {
   return (
@@ -118,11 +116,6 @@ export default function AppRoutes() {
         <Route
           path="/manager/staff/create"
           element={<CreateStaffPage />}
-        />
-
-        <Route
-          path="/manager/staff/edit/:id"
-          element={<EditStaffPage />}
         />
 
         <Route
