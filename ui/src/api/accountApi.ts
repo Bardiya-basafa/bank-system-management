@@ -1,5 +1,17 @@
 import { api } from "./client";
 
+export interface CreateAccountPayload {
+  customerId: number;
+  currencyId: number;
+  accountType: string;
+  balance: number;
+  accountStatus: string;
+}
+
+export const clientcreateAccount = (data: CreateAccountPayload) => {
+  return api.post("/api/account", data);
+};
+
 export const getAccounts = () =>
   api.get("/api/account");
 
