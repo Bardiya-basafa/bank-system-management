@@ -57,3 +57,55 @@ BEGIN
     WHERE ISNULL(i.transaction_status, '') <> ISNULL(d.transaction_status, '');
 END;
 GO
+
+CREATE TRIGGER trx.trg_CheckSourceBalance
+ON trx.transactions
+INSTEAD OF INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Check for insufficient balance
+    IF EXISTS (
+        SELECT 1
+    FROM inserted i
+        JOIN account.account a WITH (UPDLOCK, HOLDLOCK)
+        ON a.account_id = i.source_account_id
+    WHERE i.source_account_id IS NOT NULL
+        AND i.transaction_type IN ('transfer','withdraw','purchase','bill_payment')
+        AND a.balance < i.amount
+    )
+    BEGIN
+        RAISERROR ('Insufficient balance in source account.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    -- If everything is valid, insert the rows
+    INSERT INTO trx.transactions
+        (
+        reference_code,
+        source_account_id,
+        target_account_id,
+        source_device_id,
+        transaction_type,
+        amount,
+        transaction_status,
+        description,
+        issued_at,
+        completed_at
+        )
+    SELECT
+        reference_code,
+        source_account_id,
+        target_account_id,
+        source_device_id,
+        transaction_type,
+        amount,
+        transaction_status,
+        description,
+        issued_at,
+        completed_at
+    FROM inserted;
+END;
+GO
