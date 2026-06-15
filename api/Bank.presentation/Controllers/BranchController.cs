@@ -2,6 +2,7 @@
 
 using application.Interfaces;
 using domain.Entities;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,9 +11,12 @@ public class BranchController : ControllerBase {
 
     private readonly IBranchService _branchService;
 
-    public BranchController(IBranchService branchService)
+    private readonly IStaffService _staffService;
+
+    public BranchController(IBranchService branchService, IStaffService staffService)
     {
         _branchService = branchService;
+        _staffService = staffService;
     }
 
     [HttpGet]
@@ -26,15 +30,33 @@ public class BranchController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> CreateBranch([FromBody] Branch branch)
     {
-        var newId = await _branchService.CreateBranchAsync(branch);
+        try{
+            var newId = await _branchService.CreateBranchAsync(branch);
 
-        return Ok(new { Id = newId });
+            return Ok(new { Id = newId });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteBranch(int id)
     {
-        var affectedRows = await _branchService.DeleteBranchAsync(id);
+        try{
+            var affectedRows = await _branchService.DeleteBranchAsync(id);
+
+            return Ok(new { affectedRows = affectedRows });
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
+    }
+
+    [HttpPatch("set-manager/{id:int}")]
+    public async Task<IActionResult> UpdateBranchManager(int id, [FromBody] SetBranchManager setBranchManager)
+    {
+        var affectedRows = await _staffService.SetBranchId(setBranchManager.StaffId, id);
 
         return Ok(new { affectedRows = affectedRows });
     }

@@ -4,13 +4,13 @@ using Bank.presentation.DTO;
 
 namespace Bank.presentation.Controllers;
 
+using System.Text;
 using application.Interfaces;
 using domain.Entities;
 
 
 [Route("api/customer/")]
-public class CustomerController : ControllerBase
-{
+public class CustomerController : ControllerBase {
 
     private readonly ILogger<CustomerController> _logger;
 
@@ -41,34 +41,51 @@ public class CustomerController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequest request)
     {
-        var customer = new Customer
-        {
-            CustomerType = request.CustomerType,
-            Phone = request.Phone,
-            Email = request.Email,
-            PasswordHash = System.Text.Encoding.UTF8.GetBytes(request.Password),
-            Status = request.Status
-        };
-        var result = await _customerService.CreateCustomer(customer);
+        try{
+            var customer = new Customer
+            {
+                CustomerType = request.CustomerType,
+                Phone = request.Phone,
+                Email = request.Email,
+                PasswordHash = Encoding.UTF8.GetBytes(request.Password),
+                Status = request.Status
+            };
 
-        // create customer
-        return Ok(result);
+            var result = await _customerService.CreateCustomer(customer);
+
+            // create customer
+            return Ok(result);
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteCustomer(int id)
     {
-        var result = await _customerService.DeleteCustomer(id);
+        try{
+            var result = await _customerService.DeleteCustomer(id);
 
-        return Ok(result);
+            return Ok(result);
+        }
+
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateCustomer(int id, [FromBody] Customer request)
     {
-        var customer = await _customerService.UpdateCustomer(request);
+        try{
+            var customer = await _customerService.UpdateCustomer(request);
 
-        return Ok(customer);
+            return Ok(customer);
+        }
+        catch (Exception e){
+            return BadRequest("Something went wrong");
+        }
     }
 
     // get customer accounts

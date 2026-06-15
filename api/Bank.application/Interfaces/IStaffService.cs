@@ -14,5 +14,8 @@ public interface IStaffService {
     Task<int> UpdateAsync(Staff staff);
 
     Task<int> DeleteAsync(int id);
+    
+    Task<int> SetBranchId(int staffId, int branchId);
+    
 
 }

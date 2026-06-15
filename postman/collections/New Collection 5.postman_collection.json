@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "f79ce510-df72-4250-b737-d4aec788effb",
+    "name": "transaction",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get transactions",
+      "id": "46c33356-4893-4f24-9091-5cb857404400",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{transactionurl}}",
+          "host": [
+            "{{transactionurl}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get transaction by id",
+      "id": "66307e58-2719-4d44-a6ce-ac52c90de4c1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{transactionurl}}/2",
+          "host": [
+            "{{transactionurl}}"
+          ],
+          "path": [
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create transaction",
+      "id": "4900246a-66c7-4e46-aebb-4ad89ac73ccb",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"referenceCode\": \"REF14\",\r\n    \"sourceAccountId\": 1,\r\n    \"targetAccountId\": 2,\r\n    \"sourceDeviceId\": 1,\r\n    \"transactionType\": \"transfer\",\r\n    \"amount\": 50.00\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{transactionurl}}",
+          "host": [
+            "{{transactionurl}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -39,4 +39,9 @@ public class StaffService : IStaffService {
         return await _staffRepository.DeleteAsync(id);
     }
 
+    public async Task<int> SetBranchId(int staffId, int branchId)
+    {
+        return await _staffRepository.SetBranchId(staffId, branchId);
+    }
+
 }
