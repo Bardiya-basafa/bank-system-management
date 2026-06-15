@@ -8,6 +8,15 @@ export interface CreateAccountPayload {
   accountStatus: string;
 }
 
+export interface UpdateAccountPayload {
+  accountId: number;
+  accountNumber: string;
+  currencyId: number;
+  accountType: string;
+  balance: number;
+  accountStatus: string; // <-- Added this field
+}
+
 export const clientcreateAccount = (customerId: number, data: CreateAccountPayload) => {
   return api.post(`/api/account/${customerId}`, data);
 };
@@ -29,3 +38,7 @@ export const createAccount = (
   account:any
 ) =>
   api.post(`/api/account/${customerId}`, account);
+
+export const updateAccount = (data: UpdateAccountPayload) => {
+  return api.put("/api/account", data);
+};
