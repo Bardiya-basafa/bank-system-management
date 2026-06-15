@@ -25,6 +25,8 @@ import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
 import CreateLoanPage from '../pages/loan/CreateLoanPage';
 import LoanManagerPage from '../pages/loan/LoanManagerPage';
+import CreateTransactionPage from '../pages/transaction/CreateTransactionPage';
+import TransactionAdminPage from '../pages/transaction/TransactionAdminPage';
 
 export default function AppRoutes() {
   return (
@@ -139,6 +141,17 @@ export default function AppRoutes() {
         <Route
           path="/loan/create"
           element={<CreateLoanPage />}
+        />
+
+        {/* Transaction */}
+        <Route
+          path="/trx/create"
+          element={<CreateTransactionPage />}
+        />
+
+        <Route
+          path="/trx/admin"
+          element={<TransactionAdminPage />}
         />
 
         <Route
