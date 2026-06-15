@@ -4,11 +4,11 @@
 
 | Module | Total Endpoints | Connected | Remaining |
 |----------|----------|----------|----------|
-| Customer | 5 | 0 | 5 |
-| Account | 4 | 0 | 4 |
-| Staff | 4 | 0 | 4 |
+| Customer | 5 | 5 | 5 |
+| Account | 4 | 4 | 4 |
+| Staff | 4 | 4 | 4 |
 | Currency | 4 | 0 | 4 |
-| **Total** | **17** | **0** | **17** |
+| **Total** | **17** | **13** | **17** |
 
 ---
 
@@ -16,11 +16,11 @@
 
 ## Customer List Page
 
-- [ ] Connect `GET /customer`
-- [ ] Display customer table
-- [ ] Add loading state
-- [ ] Add empty state
-- [ ] Add error handling
+- [x] Connect `GET /customer`
+- [x] Display customer table
+- [x] Add loading state
+- [x] Add empty state
+- [x] Add error handling
 
 ### API
 ```http
@@ -31,12 +31,12 @@ GET /customer
 
 ## Create Customer
 
-- [ ] Create customer form UI
-- [ ] Connect `POST /customer`
-- [ ] Form validation
-- [ ] Success notification
-- [ ] Error notification
-- [ ] Refresh customer list after creation
+- [x] Create customer form UI
+- [x] Connect `POST /customer`
+- [x] Form validation
+- [x] Success notification
+- [x] Error notification
+- [x] Refresh customer list after creation
 
 ### API
 ```http
@@ -47,10 +47,10 @@ POST /customer
 
 ## Customer Details
 
-- [ ] Create customer details page
-- [ ] Connect `GET /customer/{id}`
-- [ ] Handle invalid customer id
-- [ ] Loading state
+- [x] Create customer details page
+- [x] Connect `GET /customer/{id}`
+- [x] Handle invalid customer id
+- [x] Loading state
 
 ### API
 ```http
@@ -61,10 +61,10 @@ GET /customer/{id}
 
 ## Delete Customer
 
-- [ ] Add delete button
-- [ ] Confirmation modal
-- [ ] Connect `DELETE /customer/{id}`
-- [ ] Refresh customer list
+- [x] Add delete button
+- [x] Confirmation modal
+- [x] Connect `DELETE /customer/{id}`
+- [x] Refresh customer list
 
 ### API
 ```http
@@ -75,10 +75,10 @@ DELETE /customer/{id}
 
 ## Customer Accounts
 
-- [ ] Create customer accounts section
-- [ ] Connect `GET /customer/account/{id}`
-- [ ] Display linked accounts
-- [ ] Empty state if no accounts
+- [x] Create customer accounts section
+- [x] Connect `GET /customer/account/{id}`
+- [x] Display linked accounts
+- [x] Empty state if no accounts
 
 ### API
 ```http
@@ -91,10 +91,10 @@ GET /customer/account/{id}
 
 ## Account List Page
 
-- [ ] Connect `GET /account`
-- [ ] Display account table
-- [ ] Loading state
-- [ ] Error handling
+- [x] Connect `GET /account`
+- [x] Display account table
+- [x] Loading state
+- [x] Error handling
 
 ### API
 ```http
@@ -105,11 +105,11 @@ GET /account
 
 ## Create Account
 
-- [ ] Create account form UI
-- [ ] Connect `POST /account`
-- [ ] Validation
-- [ ] Success notification
-- [ ] Refresh account list
+- [x] Create account form UI
+- [x] Connect `POST /account`
+- [x] Validation
+- [x] Success notification
+- [x] Refresh account list
 
 ### API
 ```http
@@ -120,9 +120,9 @@ POST /account
 
 ## Account Details
 
-- [ ] Create account details page
-- [ ] Connect `GET /account/{id}`
-- [ ] Handle missing account
+- [x] Create account details page
+- [x] Connect `GET /account/{id}`
+- [x] Handle missing account
 
 ### API
 ```http
@@ -133,10 +133,10 @@ GET /account/{id}
 
 ## Delete Account
 
-- [ ] Add delete action
-- [ ] Confirmation modal
-- [ ] Connect `DELETE /account/{id}`
-- [ ] Refresh list
+- [x] Add delete action
+- [x] Confirmation modal
+- [x] Connect `DELETE /account/{id}`
+- [x] Refresh list
 
 ### API
 ```http
@@ -149,10 +149,10 @@ DELETE /account/{id}
 
 ## Staff List Page
 
-- [ ] Connect `GET /staff`
-- [ ] Display staff table
-- [ ] Loading state
-- [ ] Error handling
+- [x] Connect `GET /staff`
+- [x] Display staff table
+- [x] Loading state
+- [x] Error handling
 
 ### API
 ```http
@@ -163,10 +163,10 @@ GET /staff
 
 ## Create Staff
 
-- [ ] Create staff form
-- [ ] Connect `POST /staff`
-- [ ] Validation
-- [ ] Success notification
+- [x] Create staff form
+- [x] Connect `POST /staff`
+- [x] Validation
+- [x] Success notification
 
 ### API
 ```http
@@ -177,9 +177,9 @@ POST /staff
 
 ## Staff Details
 
-- [ ] Connect `GET /staff/{id}`
-- [ ] Create details page
-- [ ] Handle invalid id
+- [x] Connect `GET /staff/{id}`
+- [x] Create details page
+- [x] Handle invalid id
 
 ### API
 ```http
@@ -190,9 +190,9 @@ GET /staff/{id}
 
 ## Delete Staff
 
-- [ ] Add delete action
-- [ ] Confirmation modal
-- [ ] Connect `DELETE /staff/{id}`
+- [x] Add delete action
+- [x] Confirmation modal
+- [x] Connect `DELETE /staff/{id}`
 
 ### API
 ```http
