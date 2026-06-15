@@ -23,6 +23,8 @@ import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
+import CreateLoanPage from '../pages/loan/CreateLoanPage';
+import LoanManagerPage from '../pages/loan/LoanManagerPage';
 
 export default function AppRoutes() {
   return (
@@ -126,6 +128,17 @@ export default function AppRoutes() {
         <Route
           path="/manager/reports"
           element={<ReportsPage />}
+        />
+
+        <Route
+          path="/manager/loans"
+          element={<LoanManagerPage />}
+        />
+
+        {/* Loan */}
+        <Route
+          path="/loan/create"
+          element={<CreateLoanPage />}
         />
 
         <Route
