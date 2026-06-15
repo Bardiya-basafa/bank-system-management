@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { clientcreateAccount } from "../../api/accountApi";
 
 export default function ClientCreateAccountPage() {
-  const [customerId, setCustomerId] = useState<string>("");
-  const [currencyId, setCurrencyId] = useState<string>("1");
-  const [accountType, setAccountType] = useState<string>("saving");
+  const { customer_id } = useParams<{ customer_id: string }>();
+
+  const [accountNumber, setAccountNumber] = useState<string>("");
+  const [currencyId, setCurrencyId] = useState<number>(1);
+  const [accountType, setAccountType] = useState<string>("current");
   const [balance, setBalance] = useState<string>("0");
   const [accountStatus, setAccountStatus] = useState<string>("active");
 
@@ -12,11 +15,17 @@ export default function ClientCreateAccountPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!customer_id) {
+      alert("Customer ID is missing from the URL.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      await clientcreateAccount({
-        customerId: Number(customerId),
+      await clientcreateAccount(Number(customer_id), {
+        accountNumber: accountNumber,
         currencyId: Number(currencyId),
         accountType: accountType,
         balance: Number(balance),
@@ -25,7 +34,7 @@ export default function ClientCreateAccountPage() {
 
       alert("Account successfully created!");
 
-      setCustomerId("");
+      setAccountNumber("");
       setBalance("0");
       
     } catch (error) {
@@ -39,29 +48,32 @@ export default function ClientCreateAccountPage() {
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", padding: "1rem" }}>
       <h1>Create New Account</h1>
+      <p style={{ color: "gray", fontSize: "0.9rem" }}>
+        Creating account for Customer ID: <strong>{customer_id}</strong>
+      </p>
 
       <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         
         <div>
-          <label>Customer ID:</label><br/>
+          <label>Account Number:</label><br/>
           <input
-            type="number"
+            type="text"
             required
-            placeholder="e.g. 123"
-            value={customerId}
-            onChange={(e) => setCustomerId(e.target.value)}
+            placeholder="e.g. 1000000000000116"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
             style={{ width: "100%" }}
           />
         </div>
 
         <div>
-          <label>Currency ID:</label><br/>
+          <label>Currency ID:</label><br />
           <input
             type="number"
             required
-            placeholder="e.g. 1"
+            placeholder="e.g. 3"
             value={currencyId}
-            onChange={(e) => setCurrencyId(e.target.value)}
+            onChange={(e) => setCurrencyId(Number(e.target.value))}
             style={{ width: "100%" }}
           />
         </div>
@@ -74,7 +86,7 @@ export default function ClientCreateAccountPage() {
             style={{ width: "100%", padding: "4px" }}
           >
             <option value="saving">Saving</option>
-            <option value="checking">Checking</option>
+            <option value="current">Current</option>
             <option value="credit">Credit</option>
           </select>
         </div>
