@@ -26,6 +26,10 @@ import AdminSettingsPage from '../pages/admin/AdminSettingsPage';
 import BranchAdminPage from '../pages/admin/BranchAdminPage';
 import EditAccountPage from '../pages/customers/EditAccountPage';
 import CreateCustomerPage from '../pages/customers/CreateCustomerPage';
+import CreateLoanPage from '../pages/loan/CreateLoanPage';
+import LoanManagerPage from '../pages/loan/LoanManagerPage';
+import CreateTransactionPage from '../pages/transaction/CreateTransactionPage';
+import TransactionAdminPage from '../pages/transaction/TransactionAdminPage';
 
 
 const SmartRoot = () => {
@@ -88,32 +92,38 @@ export default function AppRoutes() {
 
         {/* --- EMPLOYEE --- */}
         <Route element={<ProtectedRoute allowedRoles={['employee', 'manager', 'admin']} />}>
-        <Route path="/employee" element={<EmployeeDashboardPage />} />
+          <Route path="/employee" element={<EmployeeDashboardPage />} />
 
-        <Route
-            path="/employee"
-            element={<EmployeeDashboardPage />}
-        />
+          <Route
+              path="/employee"
+              element={<EmployeeDashboardPage />}
+          />
 
-        <Route
-          path="/employee/customers"
-          element={<CustomerListPage />}
-        />
+          <Route
+            path="/employee/customers"
+            element={<CustomerListPage />}
+          />
 
-        <Route
-          path="/employee/customer/:id"
-          element={<CustomerDetailsPage />}
-        />
+          <Route
+            path="/employee/customer/:id"
+            element={<CustomerDetailsPage />}
+          />
 
-        <Route
-          path="/employee/customer/:id/accounts"
-          element={<CustomerAccountsPage />}
-        />
+          <Route
+            path="/employee/customer/:id/accounts"
+            element={<CustomerAccountsPage />}
+          />
 
-        <Route
-          path="/employee/account/create"
-          element={<CreateAccountPage />}
-        />
+          <Route
+            path="/employee/account/create"
+            element={<CreateAccountPage />}
+          />
+
+          {/* Loan */}
+          <Route
+            path="/loan/create"
+            element={<CreateLoanPage />}
+          />
         </Route>
         {/* --- CUSTOMER --- */}
         <Route element={<ProtectedRoute allowedRoles={['customer']} />}>
@@ -130,17 +140,22 @@ export default function AppRoutes() {
             element={<EditAccountPage />}
           />
 
+          {/* Transaction */}
           <Route
-            path="/customer/:id/delete/:aid"
-            element={<DeleteAccountPage />}
+            path="/trx/create"
+            element={<CreateTransactionPage />}
           />
 
           <Route
-            path="/customer/create"
-            element={<CreateCustomerPage />}
+            path="/trx/admin"
+            element={<TransactionAdminPage />}
           />
           </Route>
         </Route>
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
 
       </Routes>
     </BrowserRouter>
