@@ -75,13 +75,23 @@ public class CustomerController : ControllerBase {
         }
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateCustomer(int id, [FromBody] Customer request)
+    [HttpPut]
+    public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerRequest request)
     {
         try{
-            var customer = await _customerService.UpdateCustomer(request);
+            var customer = new Customer
+            {
+                CustomerId = request.CustomerId,
+                CustomerType = request.CustomerType,
+                Phone = request.Phone,
+                Email = request.Email,
+                PasswordHash = Encoding.UTF8.GetBytes(request.Password),
+                Status = request.Status
+            };
 
-            return Ok(customer);
+            var affectedRows = await _customerService.UpdateCustomer(customer);
+
+            return Ok(affectedRows);
         }
         catch (Exception e){
             return BadRequest("Something went wrong");

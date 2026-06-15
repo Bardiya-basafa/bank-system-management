@@ -72,7 +72,7 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "set manager",
       "id": "78815de3-ea61-48e2-ba51-dcdbae1c756b",
       "request": {
         "method": "PATCH",
