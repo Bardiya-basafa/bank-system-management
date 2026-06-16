@@ -67,6 +67,9 @@ export default function AppRoutes() {
         {/* --- ADMIN  --- */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/branches"    element={<BranchAdminPage />} />
+          <Route path="/admin/currencies"  element={<CurrencyAdminPage />} />
+          <Route path="/admin/settings"    element={<AdminSettingsPage />} />
         </Route>
 
         {/* --- MANAGER ROUTES --- */}

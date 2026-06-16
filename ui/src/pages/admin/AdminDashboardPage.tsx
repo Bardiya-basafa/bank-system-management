@@ -202,6 +202,38 @@ export default function AdminDashboardPage() {
         <div style={{ marginTop: 'auto', padding: '24px', borderTop: '1px solid #1E3A5F' }}>
           <div style={{ fontSize: '12px', color: '#94A3B8' }}>Logged in as</div>
           <div style={{ fontSize: '14px', fontWeight: 600, color: '#F1F5F9', marginTop: '2px' }}>Administrator</div>
+
+          {/* LOGOUT BUTTON */}
+          <button
+            onClick={() => {
+              localStorage.removeItem('jwt'); 
+              window.location.href = '/login'; 
+            }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              background: 'transparent',
+              color: '#F87171',
+              border: '1px solid rgba(248,113,113,0.3)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(248,113,113,0.1)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            <span>⎋</span> Sign Out
+          </button>
         </div>
       </aside>
 

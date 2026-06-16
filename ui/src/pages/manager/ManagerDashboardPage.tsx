@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { api } from '../../api/client'; // Update this path to your actual api.ts file
+import { api } from '../../api/client';
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
