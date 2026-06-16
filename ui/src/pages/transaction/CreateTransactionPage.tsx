@@ -80,11 +80,6 @@ export default function CreateTransactionPage() {
 
   return (
     <div style={fs.page}>
-      <Link to="/employee" style={fs.backLink}
-        onMouseEnter={e => (e.currentTarget.style.color = '#F1F5F9')}
-        onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}
-      >← Back to Dashboard</Link>
-
       <div style={fs.header}>
         <div style={fs.eyebrow}>Transaction Operations</div>
         <h1 style={fs.h1}>Execute Transaction</h1>
