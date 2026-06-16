@@ -147,6 +147,11 @@ export default function AppRoutes() {
             path="/manager/loans"
             element={<LoanManagerPage />}
           />
+
+          <Route
+            path="/manager/trx"
+            element={<TransactionAdminPage />}
+          />
         </Route>
 
         {/* --- EMPLOYEE --- */}
@@ -190,6 +195,11 @@ export default function AppRoutes() {
           <Route path="/customer/:id/account/create" element={<CustomerCreateAccountPage />} />
           <Route path="/customer/:id/account/:aid/edit" element={<EditAccountPage />} />
           <Route path="/customer/:id/account/:aid/delete" element={<DeleteAccountPage />} />
+          {/* Transaction */}
+          <Route
+            path="/trx/create"
+            element={<CreateTransactionPage />}
+          />
         </Route>        
         <Route
           path="*"

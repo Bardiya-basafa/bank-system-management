@@ -37,24 +37,6 @@ export default function EmployeeDashboardPage() {
     error: ''
   });
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await api.get('/api/employee/dashboard-stats');
-        setStats({
-          totalCustomers: response.data.totalCustomers,
-          activeAccounts: response.data.activeAccounts,
-          pendingTasks: response.data.pendingTasks,
-          isLoading: false,
-          error: ''
-        });
-      } catch (err) {
-        setStats(prev => ({ ...prev, isLoading: false, error: 'Failed to load stats' }));
-      }
-    };
-    fetchStats();
-  }, []);
-
   const navItems = [
     { to: '/employee', label: 'Dashboard', icon: '⊞', active: true },
     { to: '/employee/customers', label: 'Customers', icon: '👥' },
@@ -122,21 +104,6 @@ export default function EmployeeDashboardPage() {
           <div style={styles.eyebrow}>Employee Portal</div>
           <h1 style={styles.h1}>Dashboard</h1>
           <p style={styles.subtitle}>Welcome back. Here's an overview of your workspace.</p>
-        </div>
-
-        {stats.error && <div style={{ color: '#F87171', marginBottom: '16px' }}>{stats.error}</div>}
-
-        <div style={styles.statRow}>
-          {[
-            { label: 'Total Customers', value: stats.isLoading ? '...' : stats.totalCustomers },
-            { label: 'Active Accounts', value: stats.isLoading ? '...' : stats.activeAccounts },
-            { label: 'Pending Tasks', value: stats.isLoading ? '...' : stats.pendingTasks },
-          ].map(s => (
-            <div key={s.label} style={styles.statCard}>
-              <div style={styles.statLabel}>{s.label}</div>
-              <div style={styles.statValue}>{s.value}</div>
-            </div>
-          ))}
         </div>
 
         <div style={{ fontSize: '12px', letterSpacing: '2px', color: '#94A3B8', textTransform: 'uppercase', marginBottom: '16px' }}>
