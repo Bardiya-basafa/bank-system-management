@@ -21,13 +21,13 @@ public static class DependencyInjection {
         services.AddScoped<IReportRepository, ReportRepository>();
 
         // for local database
-        // services.AddSingleton(
-        // new DbContext.DbContext(
-        // configuration.GetConnectionString("DefaultConnection")));
+        services.AddSingleton(
+        new DbContext.DbContext(
+        configuration.GetConnectionString("DefaultConnection")));
 
         // for docker database
-        services.AddSingleton(new DbContext.DbContext(
-        configuration.GetConnectionString("DockerDatabase")));
+        // services.AddSingleton(new DbContext.DbContext(
+        // configuration.GetConnectionString("DockerDatabase")));
 
         return services;
     }
