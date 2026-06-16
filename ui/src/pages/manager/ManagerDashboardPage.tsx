@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { api } from '../../api/client'; // Update this path to your actual api.ts file
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
@@ -170,6 +171,36 @@ const styles: Record<string, React.CSSProperties> = {
 };
 
 export default function ManagerDashboardPage() {
+  const [stats, setStats] = useState({
+    totalStaff: 0,
+    totalCustomers: 0,
+    totalAccounts: 0,
+    pendingRequests: 0,
+    isLoading: true,
+    error: ''
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // 🔄 Now pointing to the unified report endpoint!
+        const response = await api.get('/api/report');
+        
+        setStats({
+          totalStaff: response.data.totalStaff,
+          totalCustomers: response.data.totalCustomers,
+          totalAccounts: response.data.totalAccounts,
+          pendingRequests: 0, // Keep this as 0 or wire it to a requests endpoint later
+          isLoading: false,
+          error: ''
+        });
+      } catch (err) {
+        setStats(prev => ({ ...prev, isLoading: false, error: 'Failed to load live data' }));
+      }
+    };
+    fetchStats();
+  }, []);
+
   const navItems = [
     { to: '/manager', label: 'Dashboard', icon: '⊞', active: true },
     { to: '/manager/staff', label: 'Staff', icon: '👤' },
@@ -245,7 +276,39 @@ export default function ManagerDashboardPage() {
 
         <div style={{ marginTop: 'auto', padding: '24px', borderTop: '1px solid #1E3A5F' }}>
           <div style={{ fontSize: '12px', color: '#94A3B8' }}>Logged in as</div>
-          <div style={{ fontSize: '14px', fontWeight: 600, color: '#F1F5F9', marginTop: '2px' }}>Manager</div>
+          <div style={{ fontSize: '14px', fontWeight: 600, color: '#F1F5F9', marginTop: '2px', marginBottom: '16px' }}>Manager</div>
+          
+          {/* LOGOUT BUTTON */}
+          <button
+            onClick={() => {
+              localStorage.removeItem('jwt'); 
+              window.location.href = '/login'; 
+            }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              background: 'transparent',
+              color: '#F87171',
+              border: '1px solid rgba(248,113,113,0.3)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(248,113,113,0.1)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            <span>⎋</span> Sign Out
+          </button>
         </div>
       </aside>
 
@@ -257,13 +320,20 @@ export default function ManagerDashboardPage() {
           <p style={styles.subtitle}>Welcome back. Here's an overview of your workspace.</p>
         </div>
 
+        {/* Error Banner */}
+        {stats.error && (
+          <div style={{ background: 'rgba(248,113,113,0.1)', color: '#F87171', padding: '14px 20px', borderRadius: '10px', marginBottom: '24px', fontSize: '13px', border: '1px solid rgba(248,113,113,0.25)' }}>
+            {stats.error}
+          </div>
+        )}
+
         {/* Stat strip */}
         <div style={styles.statRow}>
           {[
-            { label: 'Total Staff', value: '—' },
-            { label: 'Total Customers', value: '—' },
-            { label: 'Total Accounts', value: '—' },
-            { label: 'Pending Requests', value: '0' },
+            { label: 'Total Staff', value: stats.isLoading ? '...' : stats.totalStaff },
+            { label: 'Total Customers', value: stats.isLoading ? '...' : stats.totalCustomers },
+            { label: 'Total Accounts', value: stats.isLoading ? '...' : stats.totalAccounts },
+            { label: 'Pending Requests', value: stats.isLoading ? '...' : stats.pendingRequests },
           ].map(s => (
             <div key={s.label} style={styles.statCard}>
               <div style={styles.statLabel}>{s.label}</div>

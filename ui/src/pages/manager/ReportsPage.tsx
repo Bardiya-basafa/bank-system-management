@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { api } from '../../api/client'; // Update this path to your actual api.ts file
+
+interface ReportData {
+  totalStaff: number;
+  totalAccounts: number;
+  totalCustomers: number;
+  totalManagers: number;
+  totalEmployees: number;
+  totalActiveStaff: number;
+  totalInactiveStaff: number;
+  totalSavingAccounts: number;
+  totalCheckingAccounts: number;
+  totalBusinessAccounts: number;
+  totalFrozenSuspendedAccounts: number;
+}
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
@@ -138,49 +153,60 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: '20px',
     border: '1px solid rgba(56,189,248,0.25)',
   },
-  tbd: {
-    fontSize: '32px',
-    fontWeight: 700,
-    color: '#1E3A5F',
-    fontFamily: 'monospace',
-  },
 };
 
 export default function ReportsPage() {
-  // Placeholder stats — replace with real API calls as needed
+  const [report, setReport] = useState<ReportData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      try {
+        const response = await api.get('/api/report');
+        setReport(response.data);
+      } catch (err) {
+        setError('Failed to load system reports.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReport();
+  }, []);
+
   const summaryStats = [
     {
       icon: '👤',
       label: 'Total Staff',
-      value: 'TBD',
+      value: loading ? '...' : report?.totalStaff ?? '0',
       subtext: 'Active employees and managers',
     },
     {
       icon: '👥',
       label: 'Total Customers',
-      value: 'TBD',
+      value: loading ? '...' : report?.totalCustomers ?? '0',
       subtext: 'Registered individual & business',
     },
     {
       icon: '🏦',
       label: 'Total Accounts',
-      value: 'TBD',
+      value: loading ? '...' : report?.totalAccounts ?? '0',
       subtext: 'All account types combined',
     },
   ];
 
   const staffBreakdown = [
-    { label: 'Managers', value: 'TBD' },
-    { label: 'Employees', value: 'TBD' },
-    { label: 'Active', value: 'TBD' },
-    { label: 'Inactive / Terminated', value: 'TBD' },
+    { label: 'Managers', value: loading ? '...' : report?.totalManagers ?? '0' },
+    { label: 'Employees', value: loading ? '...' : report?.totalEmployees ?? '0' },
+    { label: 'Active', value: loading ? '...' : report?.totalActiveStaff ?? '0' },
+    { label: 'Inactive / Terminated', value: loading ? '...' : report?.totalInactiveStaff ?? '0' },
   ];
 
   const accountBreakdown = [
-    { label: 'Saving Accounts', value: 'TBD' },
-    { label: 'Checking Accounts', value: 'TBD' },
-    { label: 'Business Accounts', value: 'TBD' },
-    { label: 'Frozen / Suspended', value: 'TBD' },
+    { label: 'Saving Accounts', value: loading ? '...' : report?.totalSavingAccounts ?? '0' },
+    { label: 'Checking Accounts', value: loading ? '...' : report?.totalCheckingAccounts ?? '0' },
+    { label: 'Business Accounts', value: loading ? '...' : report?.totalBusinessAccounts ?? '0' },
+    { label: 'Frozen / Suspended', value: loading ? '...' : report?.totalFrozenSuspendedAccounts ?? '0' },
   ];
 
   return (
@@ -197,6 +223,12 @@ export default function ReportsPage() {
         <h1 style={styles.h1}>Reports</h1>
         <p style={styles.subtitle}>System-wide summary of staff, customers, and accounts.</p>
       </div>
+
+      {error && (
+        <div style={{ background: 'rgba(248,113,113,0.1)', color: '#F87171', padding: '16px', borderRadius: '8px', marginBottom: '24px', border: '1px solid rgba(248,113,113,0.25)' }}>
+          {error}
+        </div>
+      )}
 
       {/* Summary stats */}
       <div style={styles.statGrid}>
