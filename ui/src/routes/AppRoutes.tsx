@@ -32,6 +32,9 @@ import CreateTransactionPage from '../pages/transaction/CreateTransactionPage';
 import TransactionAdminPage from '../pages/transaction/TransactionAdminPage';
 
 
+
+
+
 const SmartRoot = () => {
   const token = localStorage.getItem('jwt');
   if (!token) return <Navigate to="/login" replace />;
@@ -150,6 +153,19 @@ export default function AppRoutes() {
             path="/trx/admin"
             element={<TransactionAdminPage />}
           />
+
+
+          <Route path="/"                                              element={<LoginPage />} />
+          <Route path="/login"                                         element={<LoginPage />} />
+
+
+          <Route path="/customer/:id"                                  element={<CustomerDashboardPage />} />
+          <Route path="/customer/:id/account/create"                   element={<ClientCreateAccountPage />} />
+          <Route path="/customer/:id/account/:aid/edit"                element={<EditAccountPage />} />
+          <Route path="/customer/:id/account/:aid/delete"              element={<DeleteAccountPage />} />
+
+
+          <Route path="/employee/customers/create"                     element={<CreateCustomerPage />} />
           </Route>
         </Route>
         <Route

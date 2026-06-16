@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getLoans, Loan } from "../../api/loanApi";
+import { getLoans } from "../../api/loanApi";
 import DataTable from '../../components/common/DataTable';
 import { Link } from 'react-router-dom';
 
 export default function LoanManagerPage() {
-  const [loans, setLoans] = useState<Loan[]>([]);
+  const [loans, setLoans] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

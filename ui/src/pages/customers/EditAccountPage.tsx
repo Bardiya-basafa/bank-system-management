@@ -2,161 +2,143 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getAccountById, updateAccount } from "../../api/accountApi";
 
+const fs: Record<string, React.CSSProperties> = {
+  page: { minHeight: '100vh', background: '#0A1628', fontFamily: "'Inter', 'Segoe UI', sans-serif", padding: '48px' },
+  backLink: { display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#94A3B8', textDecoration: 'none', fontSize: '13px', marginBottom: '24px', transition: 'color 0.15s' },
+  header: { marginBottom: '36px' },
+  eyebrow: { fontSize: '11px', letterSpacing: '2px', color: '#A78BFA', textTransform: 'uppercase' as const, marginBottom: '6px' },
+  h1: { fontSize: '26px', fontWeight: 700, color: '#F1F5F9', margin: 0 },
+  formCard: { background: '#112240', border: '1px solid #1E3A5F', borderRadius: '12px', padding: '36px', maxWidth: '560px' },
+  sectionLabel: { fontSize: '11px', letterSpacing: '2px', color: '#94A3B8', textTransform: 'uppercase' as const, fontWeight: 600, marginBottom: '16px', paddingBottom: '10px', borderBottom: '1px solid #1E3A5F' },
+  fieldGroup: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' },
+  field: { display: 'flex', flexDirection: 'column' as const, gap: '6px' },
+  fieldFull: { display: 'flex', flexDirection: 'column' as const, gap: '6px', gridColumn: '1 / -1' },
+  label: { fontSize: '12px', fontWeight: 600, color: '#94A3B8', letterSpacing: '0.5px' },
+  input: { background: '#0A1628', border: '1px solid #1E3A5F', borderRadius: '8px', padding: '10px 14px', color: '#F1F5F9', fontSize: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' as const, fontFamily: 'inherit', transition: 'border-color 0.15s' },
+  select: { background: '#0A1628', border: '1px solid #1E3A5F', borderRadius: '8px', padding: '10px 14px', color: '#F1F5F9', fontSize: '14px', outline: 'none', width: '100%', boxSizing: 'border-box' as const, fontFamily: 'inherit', cursor: 'pointer', appearance: 'none' as const },
+  divider: { height: '1px', background: '#1E3A5F', margin: '28px 0' },
+  footer: { display: 'flex', justifyContent: 'flex-end', gap: '12px' },
+  cancelBtn: { padding: '10px 24px', background: 'transparent', border: '1px solid #1E3A5F', borderRadius: '8px', color: '#94A3B8', fontSize: '14px', fontWeight: 500, cursor: 'pointer', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', fontFamily: 'inherit', transition: 'all 0.15s' },
+  submitBtn: { padding: '10px 28px', background: '#A78BFA', border: '1px solid rgba(167,139,250,0.4)', borderRadius: '8px', color: '#0A1628', fontSize: '14px', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' },
+  successBanner: { background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '8px', padding: '14px 18px', color: '#34D399', fontSize: '14px', marginBottom: '24px', maxWidth: '560px' },
+  errorBanner: { background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '8px', padding: '14px 18px', color: '#F87171', fontSize: '14px', marginBottom: '24px', maxWidth: '560px' },
+  loadingState: { minHeight: '100vh', background: '#0A1628', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', fontFamily: "'Inter', sans-serif", fontSize: '14px' },
+  accountChip: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: '8px', padding: '8px 14px', color: '#C4B5FD', fontSize: '13px', marginBottom: '28px', fontFamily: 'monospace' },
+};
+
+const fo = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => { e.target.style.borderColor = '#A78BFA'; e.target.style.boxShadow = '0 0 0 3px rgba(167,139,250,0.15)'; };
+const bl = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => { e.target.style.borderColor = '#1E3A5F'; e.target.style.boxShadow = 'none'; };
+
 export default function EditAccountPage() {
-  const { id } = useParams<{ id: string }>();
+  const { id, customerId } = useParams<{ id: string; customerId: string }>();
+  const [accountNumber, setAccountNumber] = useState('');
+  const [currencyId, setCurrencyId] = useState(1);
+  const [accountType, setAccountType] = useState('current');
+  const [balance, setBalance] = useState('0');
+  const [accountStatus, setAccountStatus] = useState('active');
+  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [banner, setBanner] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
 
-  // Form State
-  const [accountNumber, setAccountNumber] = useState<string>("");
-  const [currencyId, setCurrencyId] = useState<number>(1);
-  const [accountType, setAccountType] = useState<string>("current");
-  const [balance, setBalance] = useState<string>("0");
-  const [accountStatus, setAccountStatus] = useState<string>("active"); // <-- Added state
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  // Fetch the existing account data when the page loads
   useEffect(() => {
     if (!id) return;
-
     getAccountById(Number(id))
       .then(res => {
-        const data = res.data;
-        // Pre-fill the form with the data from the database
-        setAccountNumber(data.accountNumber || "");
-        setCurrencyId(data.currencyId || 1);
-        setAccountType(data.accountType || "current");
-        setBalance(data.balance ? data.balance.toString() : "0");
-        setAccountStatus(data.accountStatus || "active"); // <-- Pre-fill status
-        setIsLoading(false);
+        const d = res.data;
+        setAccountNumber(d.accountNumber || '');
+        setCurrencyId(d.currencyId || 1);
+        setAccountType(d.accountType || 'current');
+        setBalance(d.balance ? String(d.balance) : '0');
+        setAccountStatus(d.accountStatus || 'active');
       })
-      .catch(err => {
-        console.error("Failed to fetch account info:", err);
-        alert("Could not load account details.");
-        setIsLoading(false);
-      });
+      .catch(() => setBanner({ type: 'error', msg: 'Could not load account details.' }))
+      .finally(() => setIsLoading(false));
   }, [id]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!id) return;
-
-    setIsSubmitting(true);
-
+    setLoading(true);
     try {
-      await updateAccount({
-        accountId: Number(id),
-        accountNumber: accountNumber,
-        currencyId: Number(currencyId),
-        accountType: accountType,
-        balance: Number(balance),
-        accountStatus: accountStatus // <-- Include in payload
-      });
-
-      alert("Account successfully updated!");
-    } catch (error) {
-      console.error("Failed to update account:", error);
-      alert("Failed to update account. Please check your inputs.");
+      await updateAccount({ accountId: Number(id), accountNumber, currencyId: Number(currencyId), accountType, balance: Number(balance), accountStatus });
+      setBanner({ type: 'success', msg: 'Account updated successfully.' });
+    } catch {
+      setBanner({ type: 'error', msg: 'Failed to update account. Please check your inputs.' });
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
-  if (isLoading) return <div>Loading account details...</div>;
+  if (isLoading) return <div style={fs.loadingState}>Loading account details…</div>;
+
+  const backTo = customerId ? `/customer/${customerId}` : '/';
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "1rem" }}>
-      <Link to={`/`} style={{ textDecoration: "none", color: "#0275d8" }}>
-        ← Go Back
-      </Link>
+    <div style={fs.page}>
+      <Link to={backTo} style={fs.backLink}
+        onMouseEnter={e => (e.currentTarget.style.color = '#F1F5F9')}
+        onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}
+      >← Back to Dashboard</Link>
 
-      <h1 style={{ marginBottom: "0.5rem" }}>Edit Account</h1>
-      <p style={{ color: "#666", marginBottom: "1.5rem" }}>
-        Updating Account <strong>#{id}</strong>
-      </p>
+      <div style={fs.header}>
+        <div style={fs.eyebrow}>Account Management</div>
+        <h1 style={fs.h1}>Edit Account</h1>
+      </div>
 
-      <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+      {banner && <div style={banner.type === 'success' ? fs.successBanner : fs.errorBanner}>{banner.type === 'success' ? '✓' : '✕'} {banner.msg}</div>}
 
-        <div>
-          <label>Account Number:</label><br />
-          <input
-            type="text"
-            required
-            value={accountNumber}
-            onChange={(e) => setAccountNumber(e.target.value)}
-            style={{ width: "100%", padding: "6px" }}
-          />
-        </div>
+      <div style={fs.accountChip}>🏦 Account #{id}</div>
 
-        <div>
-          <label>Currency ID:</label><br />
-          <input
-            type="number"
-            required
-            value={currencyId}
-            onChange={(e) => setCurrencyId(Number(e.target.value))}
-            style={{ width: "100%", padding: "6px" }}
-          />
-        </div>
+      <div style={fs.formCard}>
+        <div style={fs.sectionLabel}>Account Details</div>
+        <form onSubmit={submit}>
+          <div style={fs.fieldGroup}>
+            <div style={fs.fieldFull}>
+              <label style={fs.label}>Account Number</label>
+              <input style={{ ...fs.input, fontFamily: 'monospace' }} type="text" required value={accountNumber} onChange={e => setAccountNumber(e.target.value)} onFocus={fo} onBlur={bl} />
+            </div>
+            <div style={fs.field}>
+              <label style={fs.label}>Account Type</label>
+              <select style={fs.select} value={accountType} onChange={e => setAccountType(e.target.value)} onFocus={fo} onBlur={bl}>
+                <option value="saving">Saving</option>
+                <option value="checking">Checking</option>
+                <option value="current">Current</option>
+                <option value="credit">Credit</option>
+              </select>
+            </div>
+            <div style={fs.field}>
+              <label style={fs.label}>Currency ID</label>
+              <input style={{ ...fs.input, fontFamily: 'monospace' }} type="number" required value={currencyId} onChange={e => setCurrencyId(Number(e.target.value))} onFocus={fo} onBlur={bl} />
+            </div>
+            <div style={fs.field}>
+              <label style={fs.label}>Balance ($)</label>
+              <input style={{ ...fs.input, fontFamily: 'monospace' }} type="number" step="0.01" required value={balance} onChange={e => setBalance(e.target.value)} onFocus={fo} onBlur={bl} />
+            </div>
+            <div style={fs.field}>
+              <label style={fs.label}>Account Status</label>
+              <select style={fs.select} value={accountStatus} onChange={e => setAccountStatus(e.target.value)} onFocus={fo} onBlur={bl}>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="frozen">Frozen</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
 
-        <div>
-          <label>Account Type:</label><br/>
-          <select 
-            value={accountType} 
-            onChange={(e) => setAccountType(e.target.value)}
-            style={{ width: "100%", padding: "6px" }}
-          >
-            <option value="saving">Saving</option>
-            <option value="checking">Checking</option>
-            <option value="current">Current</option>
-            <option value="credit">Credit</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Balance ($):</label><br/>
-          <input
-            type="number"
-            step="0.01"
-            required
-            value={balance}
-            onChange={(e) => setBalance(e.target.value)}
-            style={{ width: "100%", padding: "6px" }}
-          />
-        </div>
-
-        {/* --- NEW STATUS DROPDOWN --- */}
-        <div>
-          <label>Account Status:</label><br/>
-          <select 
-            value={accountStatus} 
-            onChange={(e) => setAccountStatus(e.target.value)}
-            style={{ width: "100%", padding: "6px" }}
-          >
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="frozen">Frozen</option>
-            <option value="closed">Closed</option>
-          </select>
-        </div>
-
-        <button 
-          type="submit" 
-          disabled={isSubmitting || !id}
-          style={{ 
-            marginTop: "10px", 
-            padding: "10px", 
-            backgroundColor: "#28a745", 
-            color: "white", 
-            border: "none", 
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >
-          {isSubmitting ? "Updating..." : "Save Changes"}
-        </button>
-
-      </form>
+          <div style={fs.divider} />
+          <div style={fs.footer}>
+            <Link to={backTo} style={fs.cancelBtn}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#F1F5F9'; (e.currentTarget as HTMLElement).style.borderColor = '#94A3B8'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#94A3B8'; (e.currentTarget as HTMLElement).style.borderColor = '#1E3A5F'; }}
+            >Cancel</Link>
+            <button type="submit" disabled={loading || !id}
+              style={{ ...fs.submitBtn, opacity: (loading || !id) ? 0.7 : 1 }}
+              onMouseEnter={e => !(loading || !id) && ((e.currentTarget as HTMLElement).style.background = '#C4B5FD')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#A78BFA')}
+            >{loading ? 'Saving…' : 'Save Changes'}</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
