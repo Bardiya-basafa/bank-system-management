@@ -188,6 +188,7 @@ export default function CustomerDashboardPage() {
 
   const navItems = [
     { to: `/customer/${id}`, label: 'Overview', icon: '⊞', active: true },
+    { to: `/trx/create`, label: 'New Transaction', icon: '⇄', active: false },
   ];
 
   return (
