@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { api } from '../../api/client'; // Update this path to your actual api.ts file
+import { api } from '../../api/client';
 
 const styles: Record<string, React.CSSProperties> = {
   page: { minHeight: '100vh', background: '#0A1628', fontFamily: "'Inter', 'Segoe UI', sans-serif", display: 'flex' },
@@ -78,9 +78,42 @@ export default function EmployeeDashboardPage() {
             <span style={styles.navIcon}>{item.icon}</span>{item.label}
           </Link>
         ))}
+        
         <div style={{ marginTop: 'auto', padding: '24px', borderTop: '1px solid #1E3A5F' }}>
           <div style={{ fontSize: '12px', color: '#94A3B8' }}>Logged in as</div>
-          <div style={{ fontSize: '14px', fontWeight: 600, color: '#F1F5F9', marginTop: '2px' }}>Employee</div>
+          <div style={{ fontSize: '14px', fontWeight: 600, color: '#F1F5F9', marginTop: '2px', marginBottom: '16px' }}>Employee</div>
+          
+          {/* LOGOUT BUTTON */}
+          <button
+            onClick={() => {
+              localStorage.removeItem('jwt'); 
+              window.location.href = '/login'; 
+            }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              background: 'transparent',
+              color: '#F87171',
+              border: '1px solid rgba(248,113,113,0.3)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(248,113,113,0.1)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            <span>⎋</span> Sign Out
+          </button>
         </div>
       </aside>
 
@@ -111,7 +144,23 @@ export default function EmployeeDashboardPage() {
         </div>
         <div style={styles.grid}>
           {quickActions.map(action => (
-            <Link key={action.to} to={action.to} style={styles.card}>
+            <Link 
+              key={action.to} 
+              to={action.to} 
+              style={styles.card}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = '#2563EB';
+                el.style.background = '#1E3A5F';
+                el.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = '#1E3A5F';
+                el.style.background = '#112240';
+                el.style.transform = 'translateY(0)';
+              }}
+            >
               <div style={styles.cardIcon}>{action.icon}</div>
               <h3 style={styles.cardTitle}>{action.title}</h3>
               <p style={styles.cardDesc}>{action.desc}</p>

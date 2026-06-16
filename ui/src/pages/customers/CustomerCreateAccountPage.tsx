@@ -29,8 +29,8 @@ const fs: Record<string, React.CSSProperties> = {
 const fo = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => { e.target.style.borderColor = '#A78BFA'; e.target.style.boxShadow = '0 0 0 3px rgba(167,139,250,0.15)'; };
 const bl = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => { e.target.style.borderColor = '#1E3A5F'; e.target.style.boxShadow = 'none'; };
 
-export default function ClientCreateAccountPage() {
-  const { customer_id } = useParams<{ customer_id: string }>();
+export default function CustomerCreateAccountPage() {
+  const { id } = useParams<{ id: string }>();
   const [accountNumber, setAccountNumber] = useState('');
   const [currencyId, setCurrencyId] = useState('1');
   const [accountType, setAccountType] = useState('saving');
@@ -41,10 +41,10 @@ export default function ClientCreateAccountPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customer_id) { setBanner({ type: 'error', msg: 'Customer ID is missing from the URL.' }); return; }
+    if (!id) { setBanner({ type: 'error', msg: 'Customer ID is missing from the URL.' }); return; }
     setLoading(true);
     try {
-      await clientcreateAccount(Number(customer_id), {
+      await clientcreateAccount(Number(id), {
         accountNumber,
         currencyId: Number(currencyId),
         accountType,
@@ -62,7 +62,7 @@ export default function ClientCreateAccountPage() {
 
   return (
     <div style={fs.page}>
-      <Link to={`/customer/${customer_id}`} style={fs.backLink}
+      <Link to={`/customer/${id}`} style={fs.backLink}
         onMouseEnter={e => (e.currentTarget.style.color = '#F1F5F9')}
         onMouseLeave={e => (e.currentTarget.style.color = '#94A3B8')}
       >← Back to Dashboard</Link>
@@ -75,7 +75,7 @@ export default function ClientCreateAccountPage() {
       {banner && <div style={banner.type === 'success' ? fs.successBanner : fs.errorBanner}>{banner.type === 'success' ? '✓' : '✕'} {banner.msg}</div>}
 
       <div style={fs.customerChip}>
-        👤 Creating for Customer ID: <strong style={{ fontFamily: 'monospace' }}>#{customer_id}</strong>
+        👤 Creating for Customer ID: <strong style={{ fontFamily: 'monospace' }}>#{id}</strong>
       </div>
 
       <div style={fs.formCard}>
@@ -114,7 +114,7 @@ export default function ClientCreateAccountPage() {
 
           <div style={fs.divider} />
           <div style={fs.footer}>
-            <Link to={`/customer/${customer_id}`} style={fs.cancelBtn}
+            <Link to={`/customer/${id}`} style={fs.cancelBtn}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#F1F5F9'; (e.currentTarget as HTMLElement).style.borderColor = '#94A3B8'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#94A3B8'; (e.currentTarget as HTMLElement).style.borderColor = '#1E3A5F'; }}
             >Cancel</Link>

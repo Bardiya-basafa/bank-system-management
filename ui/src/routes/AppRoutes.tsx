@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
+import { getCustomers } from '../api/customerApi';
 
 import ProtectedRoute from '../components/ProtectedRoute';
 import LoginPage from '../pages/LoginPage';
@@ -18,7 +19,6 @@ import StaffDetailsPage from "../pages/manager/StaffDetailsPage";
 import ReportsPage from "../pages/manager/ReportsPage";
 import NotFoundPage from '../pages/NotFoundPage';
 
-import ClientCreateAccountPage from '../pages/customers/CreateAccountPage';
 import DeleteAccountPage from '../pages/customers/DeleteAccountPage';
 import CustomerDashboardPage from '../pages/customers/CustomerDashboardPage';
 import CurrencyAdminPage from '../pages/admin/CurrencyAdminPage';
@@ -30,30 +30,79 @@ import CreateLoanPage from '../pages/loan/CreateLoanPage';
 import LoanManagerPage from '../pages/loan/LoanManagerPage';
 import CreateTransactionPage from '../pages/transaction/CreateTransactionPage';
 import TransactionAdminPage from '../pages/transaction/TransactionAdminPage';
+import CustomerCreateAccountPage from '../pages/customers/CustomerCreateAccountPage';
 
 
 
 
 
 const SmartRoot = () => {
-  const token = localStorage.getItem('jwt');
-  if (!token) return <Navigate to="/login" replace />;
+  const [redirectPath, setRedirectPath] = useState<string | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
 
-  try {
-    const decodedToken: any = jwtDecode(token);
-    const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || decodedToken.role;
-    const rolesArray = (Array.isArray(userRole) ? userRole : [userRole]).map(r => String(r).toLowerCase());
+  useEffect(() => {
+    const routeUser = async () => {
+      const token = localStorage.getItem('jwt');
+      if (!token) {
+        setRedirectPath('/login');
+        return;
+      }
 
-    if (rolesArray.includes('admin')) return <Navigate to="/admin" replace />;
-    if (rolesArray.includes('manager')) return <Navigate to="/manager" replace />;
-    if (rolesArray.includes('employee')) return <Navigate to="/employee" replace />;
-    if (rolesArray.includes('customer')) return <Navigate to="/client/dashboard" replace />; 
-    
-    return <Navigate to="/login" replace />;
-  } catch {
-    localStorage.removeItem('jwt');
-    return <Navigate to="/login" replace />;
-  }
+      try {
+        const decodedToken: any = jwtDecode(token);
+        
+        // Extract Roles
+        const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || decodedToken.role;
+        const rolesArray = (Array.isArray(userRole) ? userRole : [userRole]).map(r => String(r).toLowerCase());
+
+        // Handle Staff Routing
+        if (rolesArray.includes('admin')) return setRedirectPath('/admin');
+        if (rolesArray.includes('manager')) return setRedirectPath('/manager');
+        if (rolesArray.includes('employee')) return setRedirectPath('/employee');
+        
+        // Handle Customer Routing
+        if (rolesArray.includes('customer')) {
+          // Check if ID is directly in token
+          const directId = decodedToken.customerId || decodedToken.nameid;
+          if (directId && !isNaN(Number(directId))) {
+            return setRedirectPath(`/customer/${directId}`);
+          }
+
+          // If ID is not in token, extract email from claims
+          const email = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"] 
+                     || decodedToken.email 
+                     || decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+                     || decodedToken.name;
+
+          if (email) {
+            // Fetch customers and find the match
+            const res = await getCustomers();
+            const foundCustomer = res.data.find((c: any) => c.email.toLowerCase() === email.toLowerCase());
+            
+            if (foundCustomer) {
+              return setRedirectPath(`/customer/${foundCustomer.customerId}`);
+            }
+          }
+          
+          setAuthError("Could not locate your customer profile. Please contact support.");
+          return;
+        }
+        
+        setRedirectPath('/login');
+      } catch (err) {
+        console.error("Routing error:", err);
+        localStorage.removeItem('jwt');
+        setRedirectPath('/login');
+      }
+    };
+
+    routeUser();
+  }, []);
+
+  if (authError) return <div style={{ padding: '48px', color: '#F87171', background: '#0A1628', minHeight: '100vh', fontFamily: 'sans-serif' }}>{authError}</div>;
+  if (redirectPath) return <Navigate to={redirectPath} replace />;
+  
+  return <div style={{ padding: '48px', color: '#38BDF8', background: '#0A1628', minHeight: '100vh', fontFamily: 'sans-serif' }}>Authenticating...</div>;
 };
 
 export default function AppRoutes() {
@@ -132,45 +181,12 @@ export default function AppRoutes() {
           />
         </Route>
         {/* --- CUSTOMER --- */}
-        <Route element={<ProtectedRoute allowedRoles={['customer']} />}>
-          <Route element={<ProtectedRoute allowedRoles={['employee', 'manager', 'admin', 'customer']} />}>
-          <Route path="/client/:id" element={<CustomerDashboardPage />} />
-
-          <Route
-            path="/client/:id/create"
-            element={<ClientCreateAccountPage />}
-          />
-
-          <Route
-            path="/client/:id/edit"
-            element={<EditAccountPage />}
-          />
-
-          {/* Transaction */}
-          <Route
-            path="/trx/create"
-            element={<CreateTransactionPage />}
-          />
-
-          <Route
-            path="/trx/admin"
-            element={<TransactionAdminPage />}
-          />
-
-
-          <Route path="/"                                              element={<LoginPage />} />
-          <Route path="/login"                                         element={<LoginPage />} />
-
-
-          <Route path="/customer/:id"                                  element={<CustomerDashboardPage />} />
-          <Route path="/customer/:id/account/create"                   element={<ClientCreateAccountPage />} />
-          <Route path="/customer/:id/account/:aid/edit"                element={<EditAccountPage />} />
-          <Route path="/customer/:id/account/:aid/delete"              element={<DeleteAccountPage />} />
-
-
-          <Route path="/employee/customers/create"                     element={<CreateCustomerPage />} />
-          </Route>
-        </Route>
+        <Route element={<ProtectedRoute allowedRoles={['employee', 'manager', 'admin', 'customer']} />}>
+          <Route path="/customer/:id" element={<CustomerDashboardPage />} />
+          <Route path="/customer/:id/account/create" element={<CustomerCreateAccountPage />} />
+          <Route path="/customer/:id/account/:aid/edit" element={<EditAccountPage />} />
+          <Route path="/customer/:id/account/:aid/delete" element={<DeleteAccountPage />} />
+        </Route>        
         <Route
           path="*"
           element={<NotFoundPage />}
